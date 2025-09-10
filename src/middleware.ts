@@ -1,10 +1,10 @@
 import type { NextRequest } from "next/server";
-import { auth } from "@/lib/middleware/auth.middleware";
+import { authMiddleware } from "@/lib/middleware/auth.middleware";
 
 export function middleware(req: NextRequest) {
-  return auth.middleware(req);
+  return authMiddleware(req);
 }
 
 export const config = {
-  matcher: [...auth.matcher],
-} as const;
+  matcher: ["/login", "/dashboard/:path*"],
+};
