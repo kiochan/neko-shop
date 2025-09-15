@@ -1,15 +1,15 @@
 'use client';
 
-import { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
+import { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import zod from 'zod';
 
-import { login } from "@/app/actions/auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Page } from "@/components/view/page";
+import { login } from '@/app/actions/auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Page } from '@/components/view/page';
 import {
   Form,
   FormField,
@@ -17,13 +17,13 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { CircleAlert } from "lucide-react";
+} from '@/components/ui/form';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { CircleAlert } from 'lucide-react';
 
 const schema = zod.object({
-  email: zod.email({ message: "E-mail format is invalid" }),
-  password: zod.string().min(1, { message: "Password must be not empty" }),
+  email: zod.email({ message: 'E-mail format is invalid' }),
+  password: zod.string().min(1, { message: 'Password must be not empty' }),
 });
 
 type FormValues = zod.infer<typeof schema>;
@@ -34,8 +34,8 @@ export default function LoginPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
@@ -51,17 +51,11 @@ export default function LoginPage() {
     <Page>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold text-gray-800">
-            Login
-          </CardTitle>
+          <CardTitle className="text-center text-2xl font-bold text-gray-800">Login</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-6 p-8"
-              noValidate
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-8" noValidate>
               <FormField
                 control={form.control}
                 name="email"
@@ -69,11 +63,7 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter your email"
-                        type="email"
-                        {...field}
-                      />
+                      <Input placeholder="Enter your email" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -87,11 +77,7 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Enter your password"
-                        type="password"
-                        {...field}
-                      />
+                      <Input placeholder="Enter your password" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
