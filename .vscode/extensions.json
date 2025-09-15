@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint", // ESLint - code linting and style checking
+    "esbenp.prettier-vscode", // Prettier - code formatting
+    "prisma.prisma", // Prisma - schema syntax highlighting and IntelliSense
+    "yoavbls.pretty-ts-errors", // Better TypeScript error messages
+    "github.vscode-github-actions", // GitHub Actions - CI/CD workflow support
+    "github.vscode-pull-request-github" // Manage GitHub Pull Requests & Issues inside VS Code
+  ]
+}
