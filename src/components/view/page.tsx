@@ -1,4 +1,4 @@
-import { SiteSettings } from "@/settings/site.const";
+import { SiteSettings } from '@/settings/site.const';
 
 export function Page({ children }: { children: React.ReactNode }) {
   return (
@@ -9,9 +9,7 @@ export function Page({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* content */}
-      <div className="flex-1 flex items-center justify-center p-6 bg-gray-50">
-        {children}
-      </div>
+      <div className="flex-1 flex items-center justify-center p-6 bg-gray-50">{children}</div>
 
       {/* footer */}
       <footer className="w-full border-t p-4 text-center text-sm text-gray-500">

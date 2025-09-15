@@ -1,21 +1,21 @@
-import { NextRequest } from "next/server";
-import { CheckSessionResponse } from "./model";
+import { NextRequest } from 'next/server';
+import { CheckSessionResponse } from './model';
 
 export async function checkSession(): Promise<boolean>;
 export async function checkSession(req: NextRequest): Promise<boolean>;
 export async function checkSession(req?: NextRequest): Promise<boolean> {
   const url = req
-    ? new URL("/api/auth/check-session", req.url) // absolute URL in middleware
-    : "/api/auth/check-session";
+    ? new URL('/api/auth/check-session', req.url) // absolute URL in middleware
+    : '/api/auth/check-session';
 
   const init: RequestInit = req
     ? {
         headers: {
-          cookie: req.headers.get("cookie") ?? "", // forward cookie from middleware request
+          cookie: req.headers.get('cookie') ?? '', // forward cookie from middleware request
         },
       }
     : {
-        credentials: "include", // include cookie on client-side request
+        credentials: 'include', // include cookie on client-side request
       };
 
   try {
