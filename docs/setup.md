@@ -10,28 +10,29 @@ Make sure you have **Node.js (>=18)** installed.
 Then install dependencies:
 
 ```bash
-npm install
+npm ci
+```
+
+`ci` is for `clean install`
+
+---
+
+## 2. Run post-install script.
+
+This script will ini prisma and copy dotenv file.
+
+```bash
+npm run post-install
 ```
 
 ---
 
-## 2. Environment Variables
+## 3. Database reset (optional)
 
-Copy the example `.env` file and update values as needed:
-
-```bash
-cp .env.example .env
-```
-
----
-
-## 3. Database Setup
-
-If using Prisma + SQLite:
+If it's your first time. You should reset your database.
 
 ```bash
-npx prisma migrate dev
-npx prisma db seed
+npm run db:reset
 ```
 
 ---
