@@ -1,84 +1,121 @@
-"use client";
+'use client';
+
+import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import zod from "zod";
 
 import { login } from "@/app/actions/auth";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Page } from "@/components/view/page";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { CircleAlert } from "lucide-react";
 
+const schema = zod.object({
+  email: zod.email({ message: "E-mail format is invalid" }),
+  password: zod.string().min(1, { message: "Password must be not empty" }),
+});
+
+type FormValues = zod.infer<typeof schema>;
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
 
+  const form = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = useCallback(async (values: FormValues) => {
+    setError(null);
+    const res = await login(values);
+    if (res?.error) {
+      setError(res.error);
+    }
+  }, []);
+
   return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      
+    <Page>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-bold text-gray-800">Login</CardTitle>
+          <CardTitle className="text-center text-2xl font-bold text-gray-800">
+            Login
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            const form = e.currentTarget;
-            const payload = {
-              email: (form.elements.namedItem("email") as HTMLInputElement).value,
-              password: (form.elements.namedItem("password") as HTMLInputElement)
-                .value,
-            };
-
-            const res = await login(payload);
-            if (res?.error) setError(res.error);
-          }}
-          className="space-y-6 p-8"
-        >
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                type="email"
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-6 p-8"
+              noValidate
+            >
+              <FormField
+                control={form.control}
                 name="email"
-                id="email"
-                placeholder="Enter your email"
-                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-                required
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter your password"
-                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:ring focus:ring-blue-200"
-                required
-                />
-              </div>
-              
-          
-          <Button
-            type="submit"
-            variant="outline"  className="w-full rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
-          >
-            Login
-          </Button>
-            </div> {error && <p className="text-sm text-red-500">{error}</p>}
-          </form>
 
-          
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your password"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                className="w-full rounded-lg bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700"
+              >
+                Login
+              </Button>
+
+              {error && (
+                <Alert variant="destructive">
+                  <CircleAlert />
+                  <AlertTitle>Error!</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+            </form>
+          </Form>
         </CardContent>
-      
-    </Card>
-    </div>
+      </Card>
+    </Page>
   );
 }

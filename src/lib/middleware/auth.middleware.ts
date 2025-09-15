@@ -1,16 +1,30 @@
-import { NextRequest, NextResponse } from "next/server";
+import { checkSession } from '@/app/api/auth/check-session';
+import { NextRequest, NextResponse } from 'next/server';
 
-export function authMiddleware(req: NextRequest) {
-  const sessionId = req.cookies.get("sessionId")?.value;
-  const { pathname } = req.nextUrl;
+async function protectDashboard(req: NextRequest) {
+  const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');
+  if (!isDashboard) return null;
 
-  if (!sessionId && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", req.url));
+  const valid = await checkSession(req);
+  if (!valid) {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  if (sessionId && pathname.startsWith("/login")) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  return null;
+}
+
+async function preventMultiLogin(req: NextRequest) {
+  const isLogin = req.nextUrl.pathname.startsWith('/login');
+  if (!isLogin) return null;
+
+  const valid = await checkSession(req);
+  if (valid) {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
-  return NextResponse.next();
+  return null;
+}
+
+export async function authMiddleware(req: NextRequest) {
+  return (await protectDashboard(req)) ?? (await preventMultiLogin(req)) ?? NextResponse.next();
 }
