@@ -37,11 +37,11 @@ This document provides an overview of the frameworks, tools, and folder structur
 │   │   └── page.tsx     # Home page (/)
 │   ├── const            # Global constants (inclueds enums)
 │   ├── components       # Reusable component
-│   │   ├──ui            # Single reusable component (e.g. Button, Input, Modal)
-│   │   └──view          # Composite component (built from multiple reusable components)
+│   │   ├── ui           # Single reusable component (e.g. Button, Input, Modal)
+│   │   └── view         # Composite component (built from multiple reusable components)
 │   ├── difinitions      # Type and interfaces
 │   ├── generated
-│   │   └──prisma        # Generated Prisma client
+│   │   └── prisma       # Generated Prisma client
 │   ├── lib/             # Helper libraries (e.g., auth, middleware utils)
 │   └── settings/        # Settings for whole App
 ├── public/              # Static assets
