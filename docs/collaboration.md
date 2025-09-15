@@ -67,6 +67,13 @@ Use the following categories for **branch names**, **commit messages**, and **PR
   docs: update contribution guide
   ```
 
+- **style** – Style-only changes
+  _Example:_
+
+  ```bash
+  style: fix style
+  ```
+
 - **ci** – Continuous Integration setup or configuration changes
   _Example:_
 
