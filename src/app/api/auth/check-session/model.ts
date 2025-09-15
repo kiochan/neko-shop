@@ -1,4 +1,4 @@
-import { Session } from "@/generated/prisma";
+import { Session } from '@/generated/prisma';
 
 export type CheckSessionRequest = {
   sessionId: string;

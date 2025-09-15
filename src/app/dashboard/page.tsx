@@ -1,20 +1,14 @@
-import { cookies } from "next/headers";
-import { PrismaClient } from "@/generated/prisma/client";
+import { cookies } from 'next/headers';
+import { PrismaClient } from '@/generated/prisma/client';
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Page } from "@/components/view/page";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Page } from '@/components/view/page';
 
 const prisma = new PrismaClient();
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
-  const sessionId = cookieStore.get("sessionId")?.value!;
+  const sessionId = cookieStore.get('sessionId')?.value!;
 
   const session = await prisma.session.findUnique({
     where: { id: sessionId },
@@ -54,19 +48,14 @@ export default async function DashboardPage() {
         </CardHeader>
         <CardContent>
           <p>
-            Welcome back,{" "}
-            <span className="font-semibold text-blue-600">
-              {session?.user.name ?? "User"}
-            </span>
-            !
+            Welcome back,{' '}
+            <span className="font-semibold text-blue-600">{session?.user.name ?? 'User'}</span>!
           </p>
         </CardContent>
         <CardFooter>
           <p>
-            Your user ID is:{" "}
-            <span className="font-mono font-medium text-gray-800">
-              {session?.user.id}
-            </span>
+            Your user ID is:{' '}
+            <span className="font-mono font-medium text-gray-800">{session?.user.id}</span>
           </p>
         </CardFooter>
       </Card>

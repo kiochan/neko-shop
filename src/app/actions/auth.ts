@@ -1,29 +1,29 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
-import { randomUUID } from "crypto";
-import { LoginPayload } from "@/definitions/payload/auth.model";
-import { SESSION_COOKIE_NAME, SESSION_DURATION_DAYS } from "./auth.const";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { prisma } from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
+import { randomUUID } from 'crypto';
+import { LoginPayload } from '@/definitions/payload/auth.model';
+import { SESSION_COOKIE_NAME, SESSION_DURATION_DAYS } from './auth.const';
 
 export async function login(data: LoginPayload) {
   const email = data.email;
   const password = data.password;
 
   if (!email || !password) {
-    return { error: "Missing email or password" };
+    return { error: 'Missing email or password' };
   }
 
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user) {
-    return { error: "Invalid email or password" };
+    return { error: 'Invalid email or password' };
   }
 
   const isValid = await bcrypt.compare(password, user.passwordHash);
   if (!isValid) {
-    return { error: "Invalid email or password" };
+    return { error: 'Invalid email or password' };
   }
 
   const sessionId = randomUUID();
@@ -41,13 +41,13 @@ export async function login(data: LoginPayload) {
   const cookieStore = await cookies();
   cookieStore.set(SESSION_COOKIE_NAME, sessionId, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
     expires: expiresAt,
   });
 
-  redirect("/dashboard");
+  redirect('/dashboard');
 }
 
 export async function logout() {
@@ -59,14 +59,14 @@ export async function logout() {
       where: { id: sessionId },
     });
 
-    cookieStore.set(SESSION_COOKIE_NAME, "", {
+    cookieStore.set(SESSION_COOKIE_NAME, '', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
       expires: new Date(0),
     });
   }
 
-  redirect("/");
+  redirect('/');
 }

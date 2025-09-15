@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { login } from "@/app/actions/auth";
-import { useState } from "react";
+import { login } from '@/app/actions/auth';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
@@ -13,9 +13,8 @@ export default function LoginPage() {
           e.preventDefault();
           const form = e.currentTarget;
           const payload = {
-            email: (form.elements.namedItem("email") as HTMLInputElement).value,
-            password: (form.elements.namedItem("password") as HTMLInputElement)
-              .value,
+            email: (form.elements.namedItem('email') as HTMLInputElement).value,
+            password: (form.elements.namedItem('password') as HTMLInputElement).value,
           };
 
           const res = await login(payload);
@@ -27,10 +26,7 @@ export default function LoginPage() {
 
         <div className="space-y-4">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-600">
               Email
             </label>
             <input
@@ -44,10 +40,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-600"
-            >
+            <label htmlFor="password" className="block text-sm font-medium text-gray-600">
               Password
             </label>
             <input
