@@ -33,7 +33,7 @@ This document provides an overview of the frameworks, tools, and folder structur
 │   │   ├── ... etc.     # ... Some other pages
 │   │   ├── globals.css  # Global styles
 │   │   ├── layout.tsx   # Root layout of the app
-│   │   ├── globals.css  # Flobal styles
+│   │   ├── globals.css  # Global styles
 │   │   └── page.tsx     # Home page (/)
 │   ├── const            # Global constants (inclueds enums)
 │   ├── components       # Reusable component
