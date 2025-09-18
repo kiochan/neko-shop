@@ -1,10 +1,4 @@
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  imageUrl: string;
-}
+import { Product } from '@/hooks/use-product';
 
 export const MockProductCats: Product[] = [
   // 1
