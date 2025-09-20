@@ -1,7 +1,7 @@
 'use client';
 
 import { ProductQuery, useProduct } from '@/hooks/use-product';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { ProductViewerPaginator } from './product-viewer-paginator';
 import { ProductGridViewer } from './product-grid-viewer';
@@ -17,9 +17,28 @@ export type ProductViewerProps = {
   initQuery?: ProductQuery;
 };
 
+const PageSize = 8;
+
 export default function ProductViewer({ initViewerMode, initQuery }: ProductViewerProps) {
+  const size = PageSize;
+
   const [viewerMode, setViewerMode] = useState<ViewerMode>(initViewerMode ?? ViewerMode.Grid);
-  const { isLoading, setQuery, total, queriedProducts } = useProduct(initQuery ?? {});
+  const [page, setPage] = useState<number>(1);
+  const offset = (page - 1) * PageSize;
+
+  const { isLoading, setQuery, total, queriedProducts } = useProduct(
+    initQuery ?? {
+      offset,
+      size,
+    }
+  );
+
+  useEffect(() => {
+    setQuery({
+      offset,
+      size,
+    });
+  }, [page]);
 
   const viewer =
     viewerMode === ViewerMode.Grid ? (
@@ -37,7 +56,7 @@ export default function ProductViewer({ initViewerMode, initQuery }: ProductView
         </CardHeader>
         <CardContent> {viewer}</CardContent>
         <CardFooter>
-          <ProductViewerPaginator offset={0} size={Infinity} total={total} />
+          <ProductViewerPaginator offset={offset} size={PageSize} total={total} setPage={setPage} />
         </CardFooter>
       </Card>
     </section>
