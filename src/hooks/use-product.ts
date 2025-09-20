@@ -33,9 +33,9 @@ export function useProduct(initQuery: ProductQuery): UseProductReturn {
   const size = query.size ?? allProducts.length;
   const total = allProducts.length;
 
-  // TODO: Task 1 and Task 4: implement filtering, sorting, etc.
-  // For now, just return a slice based on offset and size
-  const queriedProducts = allProducts;
+  const queriedProducts = allProducts
+    .filter((_, index) => index >= offset)
+    .filter((_, index) => index < size);
 
   return { isLoading, setQuery, total, queriedProducts };
 }
