@@ -33,7 +33,16 @@ export default function ProductViewer({ initViewerMode, initQuery }: ProductView
       <Card>
         <CardHeader>
           <CardTitle>Product</CardTitle>
-          <CardAction>Toggle{/** TODO: Task 5: Implement your Toggle here! */}</CardAction>
+          <CardAction>
+            <button
+              className="px-3 py-1 bg-gray-900 text-white rounded transition-colors hover:bg-gray-700"
+              onClick={() =>
+                setViewerMode(viewerMode === ViewerMode.Grid ? ViewerMode.List : ViewerMode.Grid)
+              }
+            >
+              {viewerMode === ViewerMode.Grid ? 'List View' : 'Grid View'}
+            </button>
+          </CardAction>
         </CardHeader>
         <CardContent> {viewer}</CardContent>
         <CardFooter>
