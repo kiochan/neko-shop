@@ -1,13 +1,11 @@
 'use client';
 
 import { ProductQuery, useProduct } from '@/hooks/use-product';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { ProductViewerPaginator } from './product-viewer-paginator';
 import { ProductGridViewer } from './product-grid-viewer';
 import { ProductListViewer } from './product-list-viewer';
-import { set } from 'zod';
-import { init } from 'next/dist/compiled/webpack/webpack';
 
 export enum ViewerMode {
   Grid = 'grid',
@@ -30,9 +28,8 @@ export default function ProductViewer({ initViewerMode, initQuery }: ProductView
   const [currentPage, setCurrentPage] = useState(1);
   const productOffset = pageSize * (currentPage - 1);
 
-  {
-    /* Update the product offset when the current page changes */
-  }
+  /* Update the product offset when the current page changes */
+
   useEffect(() => {
     setQuery({ offset: productOffset, size: pageSize });
   }, [currentPage, setQuery, productOffset]);
