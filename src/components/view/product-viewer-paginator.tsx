@@ -12,7 +12,7 @@ export type ProductViewerPaginatorProps = {
   offset: number;
   size: number;
   total: number;
-  setCurrentPage?: (page: number) => void;
+  setCurrentPage: (page: number) => void;
 };
 
 export function ProductViewerPaginator({
