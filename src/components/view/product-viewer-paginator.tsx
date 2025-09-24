@@ -34,14 +34,14 @@ export function ProductViewerPaginator({
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              {/** when current page is greater than 1 previous button active*/}
+              {/** when current page is greater than homepage previous button active*/}
               {currentPage > homePage ? (
                 <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
               ) : (
                 <PaginationPrevious />
               )}
             </PaginationItem>
-            {/** when current page is greater than 1 previous page number button active */}
+            {/** when current page is greater than homepage previous page number button active */}
             {currentPage > homePage ? (
               <PaginationItem>
                 <PaginationLink onClick={() => setCurrentPage(currentPage - 1)}>
@@ -61,13 +61,13 @@ export function ProductViewerPaginator({
                 </PaginationLink>
               </PaginationItem>
             ) : null}
-            {/** when total pages greater than 4 show ellipsis */}
+            {/** when total pages greater than showPages show ellipsis */}
             {totalPages > showPages ? (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
             ) : null}
-            {/** when total pages greater than 4 and current page less than total pages show last page number button */}
+            {/** when total pages greater than showPages and current page less than total pages show last page number button */}
             {totalPages > showPages && currentPage < totalPages ? (
               <PaginationItem>
                 <PaginationLink>{totalPages}</PaginationLink>
