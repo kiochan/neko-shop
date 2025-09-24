@@ -36,7 +36,7 @@ export function ProductViewerPaginator({
             <PaginationItem>
               {/** when current page is greater than 1 previous button active*/}
               {currentPage > homePage ? (
-                <PaginationPrevious onClick={() => setCurrentPage?.(currentPage - 1)} />
+                <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
               ) : (
                 <PaginationPrevious />
               )}
@@ -44,7 +44,7 @@ export function ProductViewerPaginator({
             {/** when current page is greater than 1 previous page number button active */}
             {currentPage > homePage ? (
               <PaginationItem>
-                <PaginationLink onClick={() => setCurrentPage?.(currentPage - 1)}>
+                <PaginationLink onClick={() => setCurrentPage(currentPage - 1)}>
                   {currentPage - 1}
                 </PaginationLink>
               </PaginationItem>
@@ -56,7 +56,7 @@ export function ProductViewerPaginator({
             {/** when current page is less than total pages next page number button active */}
             {currentPage < totalPages ? (
               <PaginationItem>
-                <PaginationLink onClick={() => setCurrentPage?.(currentPage + 1)}>
+                <PaginationLink onClick={() => setCurrentPage(currentPage + 1)}>
                   {currentPage + 1}
                 </PaginationLink>
               </PaginationItem>
@@ -76,7 +76,7 @@ export function ProductViewerPaginator({
             {/** when current page is less than total pages next button active */}
             <PaginationItem>
               {currentPage < totalPages ? (
-                <PaginationNext onClick={() => setCurrentPage?.(currentPage + 1)} />
+                <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
               ) : (
                 <PaginationNext />
               )}
