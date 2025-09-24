@@ -25,7 +25,8 @@ export default function ProductViewer({ initViewerMode, initQuery }: ProductView
     initQuery ?? { offset: 0, size: pageSize }
   );
   const totalPages = Math.ceil(total / pageSize);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPageInitial = Math.min(1, totalPages);
+  const [currentPage, setCurrentPage] = useState(currentPageInitial);
   const productOffset = pageSize * (currentPage - 1);
 
   /* Update the product offset when the current page changes */
