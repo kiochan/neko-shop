@@ -1,4 +1,13 @@
-import { Card, CardContent } from '@/components/ui/card';
+'use client';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Product } from '@/hooks/use-product';
 
 export type ProductListViewerProps = {
@@ -7,26 +16,40 @@ export type ProductListViewerProps = {
 
 export function ProductListViewer({ products }: ProductListViewerProps) {
   return (
-    <div className="flex flex-col gap-4">
-      {products.map((product) => (
-        <Card key={product.id} className="overflow-hidden">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-4">
-              {/* left products pictures */}
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[80px]">Image</TableHead>
+          <TableHead className="w-[160px]">Name</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead className="text-right">Price</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {products.map((product) => (
+          <TableRow key={product.id}>
+            <TableCell>
               <img
                 src={product.imageUrl}
                 alt={product.name}
-                className="w-12 h-12 object-cover rounded-full flex-shrink-0"
+                className="w-12 h-12 object-cover rounded-full"
               />
-              {/* right products pictures */}
-              <div className="flex flex-col flex-1 min-w-0">
-                <h3 className="text-md font-semibold truncate">{product.name}</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+            </TableCell>
+
+            <TableCell className="font-medium whitespace-normal break-words">
+              {product.name}
+            </TableCell>
+
+            <TableCell className="text-gray-600 whitespace-normal break-words max-w-[300px]">
+              {product.description}
+            </TableCell>
+
+            <TableCell className="text-right text-lg font-bold text-blue-600">
+              ${(product.price / 100).toFixed(2)}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

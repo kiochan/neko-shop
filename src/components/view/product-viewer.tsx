@@ -6,6 +6,7 @@ import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from
 import { ProductViewerPaginator } from './product-viewer-paginator';
 import { ProductGridViewer } from './product-grid-viewer';
 import { ProductListViewer } from './product-list-viewer';
+import { Button } from '@/components/ui/button';
 
 export enum ViewerMode {
   Grid = 'grid',
@@ -34,17 +35,18 @@ export default function ProductViewer({ initViewerMode, initQuery }: ProductView
         <CardHeader>
           <CardTitle>Product</CardTitle>
           <CardAction>
-            <button
-              className="px-3 py-1 bg-gray-900 text-white rounded transition-colors hover:bg-gray-700"
+            <Button
+              className="w-28"
+              variant="default"
               onClick={() =>
                 setViewerMode(viewerMode === ViewerMode.Grid ? ViewerMode.List : ViewerMode.Grid)
               }
             >
               {viewerMode === ViewerMode.Grid ? 'List View' : 'Grid View'}
-            </button>
+            </Button>
           </CardAction>
         </CardHeader>
-        <CardContent> {viewer}</CardContent>
+        <CardContent>{viewer}</CardContent>
         <CardFooter>
           <ProductViewerPaginator offset={0} size={Infinity} total={total} />
         </CardFooter>
