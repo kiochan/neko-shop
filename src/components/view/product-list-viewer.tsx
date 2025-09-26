@@ -1,3 +1,13 @@
+'use client';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { Product } from '@/hooks/use-product';
 
 export type ProductListViewerProps = {
@@ -5,5 +15,41 @@ export type ProductListViewerProps = {
 };
 
 export function ProductListViewer({ products }: ProductListViewerProps) {
-  return 'TODO: Task 3: Implement your List Viewer here!';
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[80px]">Image</TableHead>
+          <TableHead className="w-[160px]">Name</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead className="text-right">Price</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {products.map((product) => (
+          <TableRow key={product.id}>
+            <TableCell>
+              <img
+                src={product.imageUrl}
+                alt={product.name}
+                className="w-12 h-12 object-cover rounded-full"
+              />
+            </TableCell>
+
+            <TableCell className="font-medium whitespace-normal break-words">
+              {product.name}
+            </TableCell>
+
+            <TableCell className="text-gray-600 whitespace-normal break-words max-w-[300px]">
+              {product.description}
+            </TableCell>
+
+            <TableCell className="text-right text-lg font-bold text-blue-600">
+              ${(product.price / 100).toFixed(2)}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
 }
