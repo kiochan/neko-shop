@@ -23,8 +23,9 @@ export function ProductViewerPaginator({
 }: ProductViewerPaginatorProps) {
   const currentPage = Math.floor(offset / size) + 1;
   const totalPages = Math.ceil(total / size);
-  const homePage = 1;
-  const showPages = 4;
+  const firstPage = 1;
+  const lastPages = totalPages;
+  const pageGap = 2;
 
   if (totalPages < 1) {
     return null;
@@ -34,51 +35,91 @@ export function ProductViewerPaginator({
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              {/** when current page is greater than homepage previous button active*/}
-              {currentPage > homePage ? (
-                <PaginationPrevious onClick={() => setCurrentPage(currentPage - 1)} />
+              {currentPage > firstPage ? (
+                <button className="cursor-pointer" onClick={() => setCurrentPage(currentPage - 1)}>
+                  <PaginationPrevious />
+                </button>
               ) : (
-                <PaginationPrevious />
+                <button className="cursor-not-allowed" disabled>
+                  <PaginationPrevious />
+                </button>
               )}
             </PaginationItem>
-            {/** when current page is greater than homepage previous page number button active */}
-            {currentPage > homePage ? (
-              <PaginationItem>
-                <PaginationLink onClick={() => setCurrentPage(currentPage - 1)}>
-                  {currentPage - 1}
-                </PaginationLink>
-              </PaginationItem>
-            ) : null}
-            {/** square current page button */}
+            <PaginationItem>
+              {currentPage > firstPage ? (
+                <button className="cursor-pointer" onClick={() => setCurrentPage(firstPage)}>
+                  <PaginationLink>{firstPage}</PaginationLink>
+                </button>
+              ) : null}
+            </PaginationItem>
+            <PaginationItem>
+              {currentPage - pageGap > firstPage + 1 ? <PaginationEllipsis /> : null}
+            </PaginationItem>
+            {new Array(pageGap)
+              .fill(0)
+              .map((_, index) => index + 1)
+              .reverse()
+              .map((page) => {
+                if (currentPage - page > firstPage) {
+                  return (
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => setCurrentPage(currentPage - page)}
+                    >
+                      <PaginationItem key={page}>
+                        <PaginationLink onClick={() => setCurrentPage(currentPage - page)}>
+                          {currentPage - page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    </button>
+                  );
+                }
+                return null;
+              })}
             <PaginationItem>
               <PaginationLink isActive>{currentPage}</PaginationLink>
             </PaginationItem>
-            {/** when current page is less than total pages next page number button active */}
-            {currentPage < totalPages ? (
-              <PaginationItem>
-                <PaginationLink onClick={() => setCurrentPage(currentPage + 1)}>
-                  {currentPage + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ) : null}
-            {/** when total pages greater than showPages show ellipsis */}
-            {totalPages > showPages ? (
+            {new Array(pageGap)
+              .fill(0)
+              .map((_, index) => index + 1)
+              .map((page) => {
+                if (currentPage + page < lastPages) {
+                  return (
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => setCurrentPage(currentPage + page)}
+                    >
+                      <PaginationItem key={page}>
+                        <PaginationLink onClick={() => setCurrentPage(currentPage + page)}>
+                          {currentPage + page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    </button>
+                  );
+                }
+                return null;
+              })}
+            {currentPage + pageGap < lastPages - 1 ? (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
             ) : null}
-            {/** when total pages greater than showPages and current page less than total pages show last page number button */}
-            {totalPages > showPages && currentPage < totalPages ? (
+            {totalPages > pageGap && currentPage < totalPages ? (
               <PaginationItem>
-                <PaginationLink>{totalPages}</PaginationLink>
+                <button className="cursor-pointer" onClick={() => setCurrentPage(totalPages)}>
+                  <PaginationLink>{totalPages}</PaginationLink>
+                </button>
               </PaginationItem>
             ) : null}
-            {/** when current page is less than total pages next button active */}
             <PaginationItem>
               {currentPage < totalPages ? (
-                <PaginationNext onClick={() => setCurrentPage(currentPage + 1)} />
+                <button className="cursor-pointer" onClick={() => setCurrentPage(currentPage + 1)}>
+                  <PaginationNext />
+                </button>
               ) : (
-                <PaginationNext />
+                <button className="cursor-not-allowed" disabled>
+                  <PaginationNext />
+                </button>
               )}
             </PaginationItem>
           </PaginationContent>
