@@ -6,14 +6,14 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from '@/components/ui/pagination'
 
 export type ProductViewerPaginatorProps = {
-  offset: number;
-  size: number;
-  total: number;
-  setCurrentPage: (page: number) => void;
-};
+  offset: number
+  size: number
+  total: number
+  setCurrentPage: (page: number) => void
+}
 
 export function ProductViewerPaginator({
   offset,
@@ -21,14 +21,14 @@ export function ProductViewerPaginator({
   total,
   setCurrentPage,
 }: ProductViewerPaginatorProps) {
-  const currentPage = Math.floor(offset / size) + 1;
-  const totalPages = Math.ceil(total / size);
-  const firstPage = 1;
-  const lastPages = totalPages;
-  const pageGap = 2;
+  const currentPage = Math.floor(offset / size) + 1
+  const totalPages = Math.ceil(total / size)
+  const firstPage = 1
+  const lastPages = totalPages
+  const pageGap = 2
 
   if (totalPages < 1) {
-    return null;
+    return null
   } else {
     return (
       <div>
@@ -72,9 +72,9 @@ export function ProductViewerPaginator({
                         </PaginationLink>
                       </PaginationItem>
                     </button>
-                  );
+                  )
                 }
-                return null;
+                return null
               })}
             <PaginationItem>
               <PaginationLink isActive>{currentPage}</PaginationLink>
@@ -95,9 +95,9 @@ export function ProductViewerPaginator({
                         </PaginationLink>
                       </PaginationItem>
                     </button>
-                  );
+                  )
                 }
-                return null;
+                return null
               })}
             {currentPage + pageGap < lastPages - 1 ? (
               <PaginationItem>
@@ -125,6 +125,6 @@ export function ProductViewerPaginator({
           </PaginationContent>
         </Pagination>
       </div>
-    );
+    )
   }
 }

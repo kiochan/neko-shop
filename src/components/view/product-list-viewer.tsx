@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   Table,
@@ -7,12 +7,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Product } from '@/hooks/use-product';
+} from '@/components/ui/table'
+import { Product } from '@/hooks/use-product'
 
 export type ProductListViewerProps = {
-  products: Product[];
-};
+  products: Product[]
+}
 
 export function ProductListViewer({ products }: ProductListViewerProps) {
   return (
@@ -51,5 +51,5 @@ export function ProductListViewer({ products }: ProductListViewerProps) {
         ))}
       </TableBody>
     </Table>
-  );
+  )
 }

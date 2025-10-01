@@ -1,7 +1,7 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '../ui/menubar';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '../ui/menubar'
 
 export default function HeaderActionUser() {
   return (
@@ -26,5 +26,5 @@ export default function HeaderActionUser() {
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs'
 
-import { PrismaClient, PermissionAction } from '@/generated/prisma';
+import { PrismaClient, PermissionAction } from '@/generated/prisma'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
-const DefaultPassword = 'admin';
-const DefaultSaltLength = 10;
+const DefaultPassword = 'admin'
+const DefaultSaltLength = 10
 
 async function main() {
-  const passwordHash = await bcrypt.hash(DefaultPassword, DefaultSaltLength);
+  const passwordHash = await bcrypt.hash(DefaultPassword, DefaultSaltLength)
 
   const admin = await prisma.user.upsert({
     where: { email: 'admin@kiochan.one' },
@@ -18,13 +18,13 @@ async function main() {
       name: 'Admin',
       passwordHash,
     },
-  });
+  })
 
   const adminGroup = await prisma.group.upsert({
     where: { name: 'admin' },
     update: {},
     create: { name: 'admin' },
-  });
+  })
 
   const permissions = await Promise.all(
     Object.values(PermissionAction).map((action) =>
@@ -34,7 +34,7 @@ async function main() {
         create: { action },
       })
     )
-  );
+  )
 
   await prisma.group.update({
     where: { id: adminGroup.id },
@@ -43,7 +43,7 @@ async function main() {
         set: permissions.map((p) => ({ id: p.id })),
       },
     },
-  });
+  })
 
   await prisma.user.update({
     where: { id: admin.id },
@@ -52,16 +52,16 @@ async function main() {
         connect: { id: adminGroup.id },
       },
     },
-  });
+  })
 
-  console.log('✅ Admin user and group created:', admin);
+  console.log('✅ Admin user and group created:', admin)
 }
 
 main()
   .catch((e) => {
-    console.error(e);
-    process.exit(1);
+    console.error(e)
+    process.exit(1)
   })
   .finally(async () => {
-    await prisma.$disconnect();
-  });
+    await prisma.$disconnect()
+  })

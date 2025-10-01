@@ -1,12 +1,11 @@
-import { ScrollArea } from '@radix-ui/react-scroll-area';
-import Link from 'next/link';
+import { ScrollArea } from '@radix-ui/react-scroll-area'
+import Link from 'next/link'
 
-import { Button } from '../ui/button';
-
+import { Button } from '../ui/button'
 
 type MobileSidebarProps = {
-  onNavigate?: () => void;
-};
+  onNavigate?: () => void
+}
 
 export function MobileSideNavmenu({ onNavigate }: MobileSidebarProps) {
   return (
@@ -31,5 +30,5 @@ export function MobileSideNavmenu({ onNavigate }: MobileSidebarProps) {
         </div>
       </div>
     </ScrollArea>
-  );
+  )
 }

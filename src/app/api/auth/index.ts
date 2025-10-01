@@ -1,5 +1,5 @@
-import { checkSession } from './check-session';
+import { checkSession } from './check-session'
 
 export const Auth = {
   checkSession,
-};
+}

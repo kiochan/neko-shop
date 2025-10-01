@@ -1,7 +1,7 @@
-import PageContent from './page-content';
-import PageFooter from './page-footer';
-import PageHeader from './page-header';
-import { SidebarProvider } from './sidebar.context';
+import PageContent from './page-content'
+import PageFooter from './page-footer'
+import PageHeader from './page-header'
+import { SidebarProvider } from './sidebar.context'
 
 export function Page({ children }: { children: React.ReactNode }) {
   return (
@@ -12,5 +12,5 @@ export function Page({ children }: { children: React.ReactNode }) {
         <PageFooter />
       </main>
     </SidebarProvider>
-  );
+  )
 }
