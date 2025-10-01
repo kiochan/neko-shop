@@ -1,7 +1,7 @@
+import HeaderActions from './header-actions';
+import HeaderActionsMobile from './header-actions-moble';
 import Logo from './logo';
 import MobileMenuButton from './mobile-menu-button';
-import HeaderActionsMobile from './header-actions-moble';
-import HeaderActions from './header-actions';
 
 export default function PageHeader() {
   return (

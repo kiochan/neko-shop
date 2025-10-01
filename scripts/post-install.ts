@@ -1,5 +1,5 @@
-import { existsSync, copyFileSync } from 'fs';
 import { execSync } from 'child_process';
+import { existsSync, copyFileSync } from 'fs';
 import path from 'path';
 
 const envFile = path.resolve('.env');

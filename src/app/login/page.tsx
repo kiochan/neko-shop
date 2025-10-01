@@ -1,15 +1,15 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CircleAlert } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import zod from 'zod';
 
 import { login } from '@/app/actions/auth';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Page } from '@/components/view/page';
 import {
   Form,
   FormField,
@@ -18,8 +18,8 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { CircleAlert } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Page } from '@/components/view/page';
 
 const schema = zod.object({
   email: zod.email({ message: 'E-mail format is invalid' }),

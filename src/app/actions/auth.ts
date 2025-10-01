@@ -1,11 +1,15 @@
 'use server';
 
+import { randomUUID } from 'crypto';
+
+import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
-import { randomUUID } from 'crypto';
+
 import { LoginPayload } from '@/definitions/payload/auth.model';
+import { prisma } from '@/lib/prisma';
+
+
 import { SESSION_COOKIE_NAME, SESSION_DURATION_DAYS } from './auth.const';
 
 export async function login(data: LoginPayload) {

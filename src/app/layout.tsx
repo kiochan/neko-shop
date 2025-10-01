@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
 import { SiteSettings } from '@/settings/site.const';
 import './globals.css';
 

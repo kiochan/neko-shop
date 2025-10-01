@@ -1,5 +1,6 @@
-import { checkSession } from '@/app/api/auth/check-session';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { checkSession } from '@/app/api/auth/check-session';
 
 async function protectDashboard(req: NextRequest) {
   const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');

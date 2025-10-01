@@ -1,4 +1,5 @@
 import { NextRequest } from 'next/server';
+
 import { CheckSessionResponse } from './model';
 
 export async function checkSession(): Promise<boolean>;

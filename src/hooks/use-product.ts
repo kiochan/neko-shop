@@ -1,7 +1,8 @@
 'use client';
 
-import { MockProductCats } from '@/components/mocks/product.mock.data.const';
 import { useState } from 'react';
+
+import { MockProductCats } from '@/components/mocks/product.mock.data.const';
 
 export type Product = {
   id: number;

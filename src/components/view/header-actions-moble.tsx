@@ -1,5 +1,4 @@
-import { Search } from 'lucide-react';
-import { Button } from '../ui/button';
+
 import HeaderActionUser from './header-action-user';
 
 export default function HeaderActionsMobile() {

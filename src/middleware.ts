@@ -1,4 +1,5 @@
 import type { NextRequest } from 'next/server';
+
 import { authMiddleware } from '@/lib/middleware/auth.middleware';
 
 export function middleware(req: NextRequest) {

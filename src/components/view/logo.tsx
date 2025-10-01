@@ -1,5 +1,6 @@
-import { SiteSettings } from '@/settings/site.const';
 import Link from 'next/link';
+
+import { SiteSettings } from '@/settings/site.const';
 
 export default function Logo() {
   return (
