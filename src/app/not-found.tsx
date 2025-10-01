@@ -1,7 +1,8 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Page } from '@/components/view/page';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link'
+
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Page } from '@/components/view/page'
 
 export default function NotFoundPage() {
   return (
@@ -18,5 +19,5 @@ export default function NotFoundPage() {
         </CardContent>
       </Card>
     </Page>
-  );
+  )
 }

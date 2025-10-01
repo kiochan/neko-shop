@@ -1,22 +1,15 @@
-'use client';
-import { Menu } from 'lucide-react';
-import { Button } from '../ui/button';
-import {
-  SheetTrigger,
-  SheetContent,
-  Sheet,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetClose,
-  SheetFooter,
-} from '../ui/sheet';
-import { useSidebar } from './sidebar.context';
-import { MobileSideNavmenu } from './mobile-side-navmenu';
-import Logo from './logo';
+'use client'
+import { Menu } from 'lucide-react'
+
+import { Button } from '../ui/button'
+import { SheetTrigger, SheetContent, Sheet, SheetHeader, SheetTitle } from '../ui/sheet'
+
+import Logo from './logo'
+import { MobileSideNavmenu } from './mobile-side-navmenu'
+import { useSidebar } from './sidebar.context'
 
 export default function MobileMenuButton() {
-  const { open, setOpen } = useSidebar();
+  const { open, setOpen } = useSidebar()
 
   return (
     <div className="md:hidden">
@@ -38,5 +31,5 @@ export default function MobileMenuButton() {
         </SheetContent>
       </Sheet>
     </div>
-  );
+  )
 }

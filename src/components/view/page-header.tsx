@@ -1,7 +1,7 @@
-import Logo from './logo';
-import MobileMenuButton from './mobile-menu-button';
-import HeaderActionsMobile from './header-actions-moble';
-import HeaderActions from './header-actions';
+import HeaderActions from './header-actions'
+import HeaderActionsMobile from './header-actions-moble'
+import Logo from './logo'
+import MobileMenuButton from './mobile-menu-button'
 
 export default function PageHeader() {
   return (
@@ -13,5 +13,5 @@ export default function PageHeader() {
         <HeaderActionsMobile />
       </div>
     </header>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import HeaderActionUser from './header-action-user';
+import HeaderActionUser from './header-action-user'
 
 export default function HeaderActions() {
   return (
@@ -7,5 +7,5 @@ export default function HeaderActions() {
         <HeaderActionUser />
       </div>
     </div>
-  );
+  )
 }

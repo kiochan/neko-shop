@@ -1,8 +1,8 @@
-import { Product } from '@/hooks/use-product';
+import { Product } from '@/hooks/use-product'
 
 export type ProductGridViewerProps = {
-  products: Product[];
-};
+  products: Product[]
+}
 
 export function ProductGridViewer({ products }: ProductGridViewerProps) {
   return (
@@ -22,5 +22,5 @@ export function ProductGridViewer({ products }: ProductGridViewerProps) {
         </div>
       ))}
     </div>
-  );
+  )
 }

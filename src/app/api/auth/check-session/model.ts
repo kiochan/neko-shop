@@ -1,7 +1,5 @@
-import { Session } from '@/generated/prisma';
-
 export type CheckSessionRequest = {
-  sessionId: string;
-};
+  sessionId: string
+}
 
-export type CheckSessionResponse = { valid: boolean };
+export type CheckSessionResponse = { valid: boolean }

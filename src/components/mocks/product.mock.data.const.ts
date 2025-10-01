@@ -1,4 +1,4 @@
-import { Product } from '@/hooks/use-product';
+import { Product } from '@/hooks/use-product'
 
 export const MockProductCats: Product[] = [
   // 1 - 15
@@ -109,8 +109,8 @@ export const MockProductCats: Product[] = [
   },
 
   ...Array.from({ length: 54 }, (_, i) => {
-    const id = i + 16;
-    const randomName = `${Math.random().toString(36).substring(2, 7)}`;
+    const id = i + 16
+    const randomName = `${Math.random().toString(36).substring(2, 7)}`
     return {
       id,
       name: `Random Cat ${randomName}`,
@@ -121,6 +121,6 @@ export const MockProductCats: Product[] = [
         'https://images.unsplash.com/photo-1518791841217-8f162f1e1131',
         'https://images.unsplash.com/photo-1555685812-4b943f1cb0eb',
       ][id % 3],
-    } as Product;
+    } as Product
   }),
-];
+]

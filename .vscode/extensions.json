@@ -1,10 +1,12 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint", // ESLint - code linting and style checking
+    "dbaeumer.vscode-eslint", // ESLint - linting & style checking
     "esbenp.prettier-vscode", // Prettier - code formatting
-    "prisma.prisma", // Prisma - schema syntax highlighting and IntelliSense
     "yoavbls.pretty-ts-errors", // Better TypeScript error messages
-    "github.vscode-github-actions", // GitHub Actions - CI/CD workflow support
-    "github.vscode-pull-request-github" // Manage GitHub Pull Requests & Issues inside VS Code
+    "prisma.prisma", // Prisma schema support
+    "bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
+    "github.vscode-pull-request-github", // GitHub PRs & Issues
+    "github.vscode-github-actions", // GitHub Actions workflow support
+    "eamodio.gitlens" // GitLens - Git history & insights
   ]
 }
