@@ -15,7 +15,12 @@ export default function MobileMenuButton() {
     <div className="md:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Open menu">
+          <Button
+            className={`transition-opacity duration-1000 ${open ? 'opacity-0' : 'opacity-100'}`}
+            variant="ghost"
+            size="icon"
+            aria-label="Open menu"
+          >
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
@@ -23,7 +28,7 @@ export default function MobileMenuButton() {
           <div className="h-full">
             <SheetHeader>
               <SheetTitle>
-                <Logo />
+                <Logo onClick={() => setOpen(false)} />
               </SheetTitle>
             </SheetHeader>
             <MobileSideNavmenu onNavigate={() => setOpen(false)} />
