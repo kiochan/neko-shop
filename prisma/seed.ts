@@ -1,4 +1,4 @@
-import { PrismaClient } from '@/generated/prisma';
+import { PrismaClient, PermissionAction } from '@/generated/prisma';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -19,7 +19,41 @@ async function main() {
     },
   });
 
-  console.log('Admin user created:', admin);
+  const adminGroup = await prisma.group.upsert({
+    where: { name: 'admin' },
+    update: {},
+    create: { name: 'admin' },
+  });
+
+  const permissions = await Promise.all(
+    Object.values(PermissionAction).map((action) =>
+      prisma.permission.upsert({
+        where: { action },
+        update: {},
+        create: { action },
+      })
+    )
+  );
+
+  await prisma.group.update({
+    where: { id: adminGroup.id },
+    data: {
+      permissions: {
+        set: permissions.map((p) => ({ id: p.id })),
+      },
+    },
+  });
+
+  await prisma.user.update({
+    where: { id: admin.id },
+    data: {
+      groups: {
+        connect: { id: adminGroup.id },
+      },
+    },
+  });
+
+  console.log('✅ Admin user and group created:', admin);
 }
 
 main()
