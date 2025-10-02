@@ -2,9 +2,13 @@ import Link from 'next/link'
 
 import { SiteSettings } from '@/settings/site.const'
 
-export default function Logo() {
+type LogoProps = {
+  onClick?: () => void
+}
+
+export default function Logo({ onClick }: LogoProps) {
   return (
-    <Link href="/">
+    <Link href="/" onClick={onClick}>
       <h1 className="text-xl font-bold tracking-tight">{SiteSettings.name}</h1>
     </Link>
   )

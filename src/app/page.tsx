@@ -1,10 +1,9 @@
 import { Page } from '@/components/view/page'
-import ProductViewer from '@/components/view/product-viewer'
 
 export default function HomePage() {
   return (
     <Page>
-      <ProductViewer />
+      <h1>TODO: Home Page</h1>
     </Page>
   )
 }
