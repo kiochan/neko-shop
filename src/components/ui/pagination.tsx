@@ -62,7 +62,7 @@ function PaginationButton({ className, isActive, size = 'icon', ...props }: Pagi
   return (
     <button
       aria-current={isActive ? 'page' : undefined}
-      data-slot="pagination-link"
+      data-slot="pagination-button"
       data-active={isActive}
       className={cn(
         buttonVariants({
