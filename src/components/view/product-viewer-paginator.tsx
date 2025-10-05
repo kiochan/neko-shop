@@ -6,6 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+  PaginationButton,
 } from '@/components/ui/pagination'
 
 export type ProductViewerPaginatorProps = {
@@ -60,18 +61,17 @@ export function ProductViewerPaginator({
               .map((_, index) => index + 1)
               .reverse()
               .map((page) => {
-                if (currentPage - page > firstPage) {
+                const targetPage = currentPage - page
+                if (targetPage > firstPage) {
                   return (
-                    <button
-                      className="cursor-pointer"
-                      onClick={() => setCurrentPage(currentPage - page)}
-                    >
-                      <PaginationItem key={page}>
-                        <PaginationLink onClick={() => setCurrentPage(currentPage - page)}>
-                          {currentPage - page}
-                        </PaginationLink>
-                      </PaginationItem>
-                    </button>
+                    <PaginationItem key={page}>
+                      <PaginationButton
+                        className="cursor-pointer"
+                        onClick={() => setCurrentPage(currentPage - page)}
+                      >
+                        {currentPage - page}
+                      </PaginationButton>
+                    </PaginationItem>
                   )
                 }
                 return null
@@ -83,18 +83,17 @@ export function ProductViewerPaginator({
               .fill(0)
               .map((_, index) => index + 1)
               .map((page) => {
-                if (currentPage + page < lastPages) {
+                const targetPage = currentPage + page
+                if (targetPage < lastPages) {
                   return (
-                    <button
-                      className="cursor-pointer"
-                      onClick={() => setCurrentPage(currentPage + page)}
-                    >
-                      <PaginationItem key={page}>
-                        <PaginationLink onClick={() => setCurrentPage(currentPage + page)}>
-                          {currentPage + page}
-                        </PaginationLink>
-                      </PaginationItem>
-                    </button>
+                    <PaginationItem key={page}>
+                      <PaginationButton
+                        className="cursor-pointer"
+                        onClick={() => setCurrentPage(currentPage + page)}
+                      >
+                        {currentPage + page}
+                      </PaginationButton>
+                    </PaginationItem>
                   )
                 }
                 return null
