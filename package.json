@@ -15,6 +15,7 @@
     "db:seed": "prisma db seed",
     "dev": "next dev --turbopack",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "postinstall": "tsx ./scripts/post-install.ts",

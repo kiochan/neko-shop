@@ -31,7 +31,7 @@ jobs:
         run: pnpm run lint
 
       - name: Check code formatting with Prettier
-        run: pnpm run format -- --check
+        run: pnpm run format:check
 
       - name: Run build
         run: pnpm run build
