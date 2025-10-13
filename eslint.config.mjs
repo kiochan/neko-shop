@@ -15,11 +15,10 @@ export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
   prettierConfig,
+  nextPlugin.configs.recommended,
 
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -30,8 +29,13 @@ export default [
     },
     settings: {
       'import/resolver': {
-        typescript: { project: './tsconfig.json' },
-        node: true,
+        typescript: {
+          project: './tsconfig.json',
+          alwaysTryTypes: true,
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
       },
       react: { version: 'detect' },
     },
@@ -42,12 +46,11 @@ export default [
       'unused-imports': unusedImports,
     },
     rules: {
-      /* --- React --- */
-      'react/react-in-jsx-scope': 'off', // Not needed in Next.js
+      // React specific rules
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
-      /* --- Import ordering --- */
+      // Import sorting
       'import/order': [
         'error',
         {
@@ -59,7 +62,7 @@ export default [
         },
       ],
 
-      /* --- Remove unused imports/vars --- */
+      // Remove unused imports/variables
       'unused-imports/no-unused-imports': 'error',
       '@typescript-eslint/no-unused-vars': 'off', // disable duplicate check
       'unused-imports/no-unused-vars': [
