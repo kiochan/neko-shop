@@ -1,6 +1,7 @@
-import { defineConfig } from 'prisma/config'
-import dotenv from 'dotenv'
 import path from 'path'
+
+import dotenv from 'dotenv'
+import { defineConfig } from 'prisma/config'
 
 // Determine if we are in development mode
 const isDev = process.env.NODE_ENV !== 'production'
