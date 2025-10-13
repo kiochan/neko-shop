@@ -1,0 +1,49 @@
+model User {
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime       @default(now())
+
+  groups       Group[]        @relation("UserGroups")
+  sessions     Session[]
+  customer     Customer?      @relation("CustomerUser")
+}
+
+model Group {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+
+  users       User[]        @relation("UserGroups")
+  permissions Permission[]  @relation("GroupPermissions")
+}
+
+model Permission {
+  id      Int               @id @default(autoincrement())
+  action  PermissionAction  @unique
+
+  groups  Group[]           @relation("GroupPermissions")
+}
+
+enum PermissionAction {
+  EDIT_USER_ROLE
+  EDIT_USER_SETTINGS
+  EDIT_ORDER
+  EDIT_PRODUCT
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+model Customer {
+  id        Int        @id
+  user      User       @relation("CustomerUser", fields: [id], references: [id])
+
+  orders    Order[]    @relation("CustomerOrders")
+  addresses Address[]  @relation("CustomerAddress")
+}

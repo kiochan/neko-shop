@@ -1,0 +1,10 @@
+// prisma/schema.prisma
+// learn more: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" // will be changed to postgresql later
+  url      = env("DATABASE_URL")
+}
