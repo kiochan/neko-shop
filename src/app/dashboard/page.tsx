@@ -1,8 +1,8 @@
+import { PrismaClient } from '@prisma/client'
 import { cookies } from 'next/headers'
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Page } from '@/components/view/page'
-import { PrismaClient } from '@/generated/prisma/client'
 
 const prisma = new PrismaClient()
 
