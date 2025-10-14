@@ -1,20 +1,20 @@
 model Product {
-  id          Int        @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  slug        String     @unique
+  slug        String   @unique
   description String
   price       Decimal
   imageUrl    String?
-  createdAt   DateTime   @default(now())
+  createdAt   DateTime @default(now())
 
-  tags        Tag[]      @relation("ProductTags")
-  orderItems  OrderItem[]
+  tags       Tag[]       @relation("ProductTags")
+  orderItems OrderItem[]
 }
 
 model Tag {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique
-  slug      String     @unique
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  slug String @unique
 
-  products  Product[]  @relation("ProductTags")
+  products Product[] @relation("ProductTags")
 }

@@ -1,18 +1,18 @@
 model Address {
-  id              Int           @id @default(autoincrement())
-  customerId      Int
-  customer        Customer      @relation("CustomerAddress", fields: [customerId], references: [id])
+  id         Int      @id @default(autoincrement())
+  customerId Int
+  customer   Customer @relation("CustomerAddress", fields: [customerId], references: [id])
 
-  detailId        Int           @unique
-  detail          AddressDetail @relation("AddressDetails", fields: [detailId], references: [id])
+  detailId Int           @unique
+  detail   AddressDetail @relation("AddressDetails", fields: [detailId], references: [id])
 
-  shippingOrders  Order[]       @relation("ShippingAddress")
-  billingOrders   Order[]       @relation("BillingAddress")
+  shippingOrders Order[] @relation("ShippingAddress")
+  billingOrders  Order[] @relation("BillingAddress")
 }
 
 model AddressDetail {
-  id        Int      @id @default(autoincrement())
-  address   Address? @relation("AddressDetails")
+  id      Int      @id @default(autoincrement())
+  address Address? @relation("AddressDetails")
 
   addressee String
   street    String
