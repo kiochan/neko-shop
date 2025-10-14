@@ -8,6 +8,8 @@
   },
   "scripts": {
     "build": "next build --turbopack",
+    "build:prod": "pnpm db:generate && pnpm build",
+    "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:migrate:prod": "prisma migrate deploy",
     "db:studio": "prisma studio",
@@ -19,7 +21,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "postinstall": "tsx ./scripts/post-install.ts",
+    "postinstall": "pnpm db:generate",
     "start": "next start"
   },
   "dependencies": {
