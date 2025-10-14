@@ -1,6 +1,5 @@
+import { PrismaClient, PermissionAction } from '@prisma/client'
 import bcrypt from 'bcryptjs'
-
-import { PrismaClient, PermissionAction } from '@/generated/prisma'
 
 const prisma = new PrismaClient()
 

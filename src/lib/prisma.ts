@@ -1,5 +1,5 @@
 // lib/prisma.ts
-import { PrismaClient } from '@/generated/prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 declare global {
   // Let TypeScript know that a prisma instance might be attached to global

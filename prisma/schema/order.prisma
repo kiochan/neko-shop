@@ -1,0 +1,35 @@
+model Order {
+  id                 Int         @id @default(autoincrement())
+  customerId         Int
+  customer           Customer    @relation("CustomerOrders", fields: [customerId], references: [id])
+  createdAt          DateTime    @default(now())
+  lastUpdated        DateTime    @updatedAt
+  status             OrderStatus @default(PENDING)
+  totalAmount        Decimal
+
+  items              OrderItem[]
+
+  shippingAddressId  Int
+  shippingAddress    Address     @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+
+  billingAddressId   Int
+  billingAddress     Address     @relation("BillingAddress", fields: [billingAddressId], references: [id])
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  orderId   Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Decimal
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELED
+}
