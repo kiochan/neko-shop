@@ -1,0 +1,15 @@
+model UploadedImage {
+  id             Int      @id @default(autoincrement())
+  hashedFilename String   @unique // Hashed file name, e.g. "3ac92f8a.webp"
+  name           String // Original or display name of the image
+  description    String? // Optional description text
+  domain         String // Logical category (e.g. "product", "user", "banner")
+  uploadDate     DateTime @default(now()) // Upload timestamp
+  path           String // Relative file path, e.g. "uploads/images/product/2025-10-14/3ac92f8a.webp"
+  // tags String[] @default([]) // List of tags for filtering and search
+  // @@fulltext([name, description, tags])
+
+  // Optional indexes for better performance on search and filtering
+  @@index([domain])
+  @@index([uploadDate])
+}
