@@ -1,5 +1,3 @@
-export type SafeResult<T, E extends Error = Error> =
-  | { ok: true; value: T }
-  | { ok: false; error: E }
+export type SafeResult<T, E = unknown> = { ok: true; value: T } | { ok: false; error: E }
 
-export type SafePromiseResult<T, E extends Error = Error> = Promise<SafeResult<T, E>>
+export type SafePromiseResult<T, E = unknown> = Promise<SafeResult<T, E>>
