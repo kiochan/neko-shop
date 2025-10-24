@@ -8,7 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Product } from '@/hooks/use-product'
+
+import { Product } from '../definitions'
 
 export type ProductListViewerProps = {
   products: Product[]

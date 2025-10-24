@@ -1,10 +1,5 @@
-import { Page } from '@/components/view/page'
-import ProductViewer from '@/components/view/product-viewer'
+import { redirect } from 'next/navigation'
 
-export default function ProductPage() {
-  return (
-    <Page>
-      <ProductViewer />
-    </Page>
-  )
+export default function ProductHomePage() {
+  redirect('product/1')
 }
