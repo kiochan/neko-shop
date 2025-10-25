@@ -1,4 +1,4 @@
-import { Product } from '@/hooks/use-product'
+import { Product } from '../definitions'
 
 export type ProductGridViewerProps = {
   products: Product[]

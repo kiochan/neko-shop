@@ -1,4 +1,4 @@
-import { Product } from '@/hooks/use-product'
+import { Product } from '../definitions'
 
 export const MockProductCats: Product[] = [
   // 1 - 15
