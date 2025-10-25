@@ -1,5 +1,5 @@
 export * from './actions'
 export * from './hooks'
 export * from './components'
-export * from './routes/upload-image.route'
-export * from './schema'
+export * from './apis'
+export * from './dto'
