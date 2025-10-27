@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 type imageScr = {
-  src: 'string';
-  alt: 'string';
-  abrv: 'string';
-};
+  src?: string
+  alt?: string
+  abrv?: string
+}
 
 export function AvatarSelection({ src, alt, abrv, ...props }: imageScr) {
   return (
@@ -15,7 +15,7 @@ export function AvatarSelection({ src, alt, abrv, ...props }: imageScr) {
           src={src ?? 'https://github.com/shadcn.png'}
           alt={alt ?? '@shadcn'}
         />
-        <AvatarFallback>abrv={abrv ?? 'CN'}</AvatarFallback>
+        <AvatarFallback>{(abrv = abrv ?? 'CN')}</AvatarFallback>
       </Avatar>
       <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
         <Avatar>
@@ -28,5 +28,5 @@ export function AvatarSelection({ src, alt, abrv, ...props }: imageScr) {
         </Avatar>
       </div>
     </div>
-  );
+  )
 }
