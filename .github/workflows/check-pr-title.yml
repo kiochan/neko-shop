@@ -1,0 +1,39 @@
+name: Validate PR Title
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  check-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title format
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const title = context.payload.pull_request.title;
+
+            // Rules:
+            // - type must be one of the allowed types
+            // - optional scope must be lowercase letters, digits, or hyphens
+            // - description must start with a lowercase letter
+            // - total length must not exceed 50 characters
+            const pattern = /^(feat|fix|docs|style|refactor|test|chore|ci|build|perf|release)(\([a-z0-9-]+\))?:\s[a-z].{0,48}$/;
+
+            if (!pattern.test(title)) {
+              core.setFailed(
+                `Invalid PR title format.\n\n` +
+                `Received:\n  "${title}"\n\n` +
+                `Requirements:\n` +
+                `  - Allowed types: feat, fix, docs, style, refactor, test, chore, ci, build, perf, release\n` +
+                `  - Optional scope: lowercase letters, digits, hyphens\n` +
+                `  - Description must start with a lowercase letter\n` +
+                `  - Total length must not exceed 50 characters\n\n` +
+                `Examples:\n` +
+                `  feat: add login support\n` +
+                `  fix: correct null reference\n` +
+                `  docs: update usage guide\n` +
+                `  feat(auth): implement user session\n`
+              );
+            }

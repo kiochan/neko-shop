@@ -1,113 +1,97 @@
 # Collaboration Guide
 
-This project welcomes contributions!
-Since some team members are new to development, please follow this guide carefully.
+This project welcomes contributions.
+Please follow this guide to maintain consistency and readability across the codebase.
 
 ---
 
-## 1. Using Git and GitHub
+## 1. Git and GitHub Workflow
 
 ### Branching
 
-- Always create a new branch from `dev`:
+Always branch from `dev`:
 
-  ```bash
-  git checkout dev
-  git pull origin dev
-  git checkout -b <categorie>/<what-you-have-down>
-  ```
+```bash
+git checkout dev
+git pull origin dev
+git checkout -b <type>/<short-description>
+```
+
+Examples:
+
+```
+feat/user-login
+fix/token-refresh
+docs/api-guide
+```
 
 ### Pull Requests (PRs)
 
-- Push your branch to GitHub:
+Push your branch:
 
-  ```bash
-  git push origin <categorie>/<what-you-have-down>
-  ```
+```bash
+git push origin <type>/<short-description>
+```
 
-- Open a Pull Request on GitHub.
-- Link related issues by writing `Closes #7` in the PR description.
+Open a PR and, if relevant, link issues using:
 
-#### PR & Commit Categories
-
-Use the following categories for **branch names**, **commit messages**, and **PR titles** to keep everything consistent:
-
-- **feature** – New features or modules
-  _Commit/PR example:_
-
-  ```bash
-  feat: add user authentication
-  ```
-
-- **bugfix** – Fixing existing issues or defects
-  _Example:_
-
-  ```bash
-  fix: resolve login crash
-  ```
-
-- **refactor** – Improving code structure without changing behavior
-  _Example:_
-
-  ```bash
-  refactor: simplify form component
-  ```
-
-- **chore** – Maintenance tasks, dependency updates, build scripts, etc.
-  _Example:_
-
-  ```bash
-  chore: update dependencies
-  ```
-
-- **doc** – Documentation updates
-  _Example:_
-
-  ```bash
-  docs: update contribution guide
-  ```
-
-- **style** – Style-only changes
-  _Example:_
-
-  ```bash
-  style: fix style
-  ```
-
-- **ci** – Continuous Integration setup or configuration changes
-  _Example:_
-
-  ```bash
-  ci: add lint workflow
-  ```
-
-### Code Review
-
-- Every PR must be reviewed by at least one collaborator.
-- Address comments and push changes before merging.
-- Do not commit directly to `main`.
+```
+Closes #7
+```
 
 ---
 
-## 2. Basic Workflow for Contributing
+## 2. Commit and PR Title Format
 
-1. Create a branch from `main`.
-2. Make your changes locally.
-3. Commit often with clear messages following the format:
+All commit messages and PR titles must follow this format:
 
-   ```bash
-   <categorie>: <short description>
-   ```
+```
+type(scope): short description
+```
 
-   Example:
+Rules:
 
-   ```bash
-   feature: add login form validation
-   ```
+1. `type` must be one of:
+   `feat fix docs style refactor test chore ci build perf release`
+2. `scope` is optional. If used, it must contain only:
+   lowercase letters, digits, hyphens
+   Example: `(user-profile)`
+3. Description must start with a lowercase letter
+4. Total length must not exceed 50 characters
 
-4. Push your branch and open a PR.
-5. Request a review, fix feedback, then merge.
+### Valid examples
+
+```
+feat: add login support
+fix(auth): handle token refresh failure
+docs: update setup instructions
+ci: add PR title validation
+```
+
+### Invalid examples
+
+```
+Feat: add login support          # type must be lowercase
+feat(User): add login support    # scope must be lowercase
+feat(api): Add login support     # description must start lowercase
+feat: add login feature that is too long to fit in one line  # exceeds 50 chars
+```
 
 ---
 
-Remember: small, focused PRs are easier to review and merge.
+## 3. Code Review
+
+- Every PR must be reviewed by at least one collaborator
+- Apply feedback before merging
+- Do not commit directly to `dev`
+
+---
+
+## 4. Recommended Contribution Workflow
+
+1. Create a branch from `dev`
+2. Implement changes in small, focused commits
+3. Use the commit message format shown above
+4. Push the branch and open a PR
+5. Request review and revise if necessary
+6. Merge once approved

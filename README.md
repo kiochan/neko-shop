@@ -16,3 +16,9 @@ npm install
 # Start the dev server
 npm run dev
 ```
+
+## Contributing
+
+Please follow the collaboration guide for branching, commit message format, and PR rules:
+
+See: `docs/collaboration.md` [link](.//docs/collaboration.md)
