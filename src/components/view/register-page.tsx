@@ -6,8 +6,11 @@ import { AvatarSelection } from '../ui/avatar-selection'
 import { Card } from '../ui/card'
 import { Checkbox } from '../ui/checkbox'
 import { SelectNation } from '../ui/select-nation'
+import { useState } from 'react'
 
 export default function RegisterPage() {
+  const [username, setUsername] = useState('') // Placeholder for username state
+
   return (
     <div
       className="
@@ -21,14 +24,33 @@ export default function RegisterPage() {
         <div className="mb-10 text-sm font-italic break-words">
           Description/Instructions for registration
         </div>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <AvatarSelection />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Pick your avatar</p>
-          </TooltipContent>
-        </Tooltip>
+        <div className="flex items-baseline gap-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <AvatarSelection chr={username?.charAt(0).toUpperCase()} />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-sm">
+                The default avatar is '?' and the first character of your username will be your
+                avatar
+              </p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Input
+                type="text"
+                placeholder="Username"
+                className="block mb-4"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-sm">Choose a unique username</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
         <Tooltip>
           <TooltipTrigger asChild>
             <Input type="email" placeholder="Email" className="block mb-4" />
@@ -39,26 +61,10 @@ export default function RegisterPage() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Input type="text" placeholder="Username" className="block mb-4" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Choose a unique username</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
             <Input type="date" className="block mb-4" />
           </TooltipTrigger>
           <TooltipContent>
             <p className="text-sm">Data of birth</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <SelectNation className="w-full block mb-4" nation="Nationality" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Select your Nationality</p>
           </TooltipContent>
         </Tooltip>
         <Tooltip>
