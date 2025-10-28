@@ -6,12 +6,12 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '@/components/ui/select'
 
 type selectNationProps = {
-  className?: string;
-  nation: string;
-};
+  className?: string
+  nation: string
+}
 
 export function SelectNation({ className, nation, ...props }: selectNationProps) {
   return (
@@ -51,5 +51,5 @@ export function SelectNation({ className, nation, ...props }: selectNationProps)
         </SelectGroup>
       </SelectContent>
     </Select>
-  );
+  )
 }
