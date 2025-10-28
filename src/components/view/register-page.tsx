@@ -8,8 +8,8 @@ import { AvatarSelection } from '../ui/avatar-selection'
 import { Card } from '../ui/card'
 import { Checkbox } from '../ui/checkbox'
 
-export default function RegisterPage() {
-  const [username, setUsername] = useState('') // Placeholder for username state
+export default function RegisterPageview() {
+  const [username, setUsername] = useState('')
 
   return (
     <div
