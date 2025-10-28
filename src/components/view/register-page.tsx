@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -5,8 +7,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { AvatarSelection } from '../ui/avatar-selection'
 import { Card } from '../ui/card'
 import { Checkbox } from '../ui/checkbox'
-import { SelectNation } from '../ui/select-nation'
-import { useState } from 'react'
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('') // Placeholder for username state
