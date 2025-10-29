@@ -22,6 +22,12 @@ export async function middleware(req: NextRequest) {
   if (requestMatchPaths(req, PROTECTED_PAGES) && (await notAlreadyLogin(req))) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
+
+  if (requestMatchPaths(req, AUTH_PAGES) && !(await isAlreadyLogin(req))) {
+    return NextResponse.redirect(new URL('/dashboard', req.url))
+  }
+
+  return NextResponse.next()
 }
 
 export const config = {
