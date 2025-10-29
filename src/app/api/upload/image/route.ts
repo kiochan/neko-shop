@@ -1,3 +1,3 @@
-import { UploadImage } from '@/features/image-uploader'
+import { UploadImage } from '@/features/image-uploader/server'
 
-export const POST = UploadImage.route.POST
+export const POST = UploadImage.POST
