@@ -1,40 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { checkSession } from '@/features/auth'
+import { checkSession } from './features/auth'
 
-async function protectDashboard(req: NextRequest) {
-  const isDashboard = req.nextUrl.pathname.startsWith('/dashboard')
-  if (!isDashboard) return null
+const AUTH_PAGES = ['/login', '/register', '/logout'] as const
+const PROTECTED_PAGES = ['/dashboard'] as const
 
+function requestMatchPaths(req: NextRequest, paths: readonly string[]) {
+  return paths.some((p) => req.nextUrl.pathname.startsWith(p))
+}
+
+async function isAlreadyLogin(req: NextRequest): Promise<boolean> {
   const res = await checkSession(req)
-  if (!res.ok || !res.value.valid) {
+  return res.ok && res.value.valid
+}
+
+async function notAlreadyLogin(req: NextRequest): Promise<boolean> {
+  return !(await isAlreadyLogin(req))
+}
+
+export async function middleware(req: NextRequest) {
+  if (requestMatchPaths(req, PROTECTED_PAGES) && (await notAlreadyLogin(req))) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
-
-  return null
-}
-
-async function preventMultiLogin(req: NextRequest) {
-  const isLogin = req.nextUrl.pathname.startsWith('/login')
-  if (!isLogin) return null
-
-  const res = await checkSession(req)
-
-  if (res.ok && res.value.valid) {
-    return NextResponse.redirect(new URL('/dashboard', req.url))
-  }
-
-  return null
-}
-
-async function authMiddleware(req: NextRequest) {
-  return (await protectDashboard(req)) ?? (await preventMultiLogin(req)) ?? NextResponse.next()
-}
-
-export function middleware(req: NextRequest) {
-  return authMiddleware(req)
 }
 
 export const config = {
-  matcher: ['/login', '/dashboard/:path*'],
+  matcher: ['/:path*'],
 }
