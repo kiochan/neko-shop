@@ -1,105 +1,181 @@
 'use client'
 
-import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useTransition } from 'react'
+import { useForm } from 'react-hook-form'
 
+import { registerAction } from '@/features/auth/actions'
+import { RegisterDto } from '@/features/auth/dto'
 import { AvatarSelection } from '@/shared/ui/avatar-selection'
+import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { Checkbox } from '@/shared/ui/checkbox'
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  FormDescription,
+} from '@/shared/ui/form'
 import { Input } from '@/shared/ui/input'
-import { Label } from '@/shared/ui/label'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip'
+
+import { UiText } from '../const'
 
 export function RegisterCard() {
-  const [username, setUsername] = useState('')
+  const [isPending, startTransition] = useTransition()
+
+  const form = useForm<RegisterDto.RegisterRequest>({
+    resolver: zodResolver(RegisterDto.RegisterRequestZod),
+    defaultValues: {
+      username: '',
+      email: '',
+      dob: '',
+      password: '',
+      confirmPassword: '',
+      agree: false,
+    },
+  })
+
+  function onSubmit(values: RegisterDto.RegisterRequest) {
+    startTransition(async () => {
+      const result = await registerAction(values)
+
+      if (!result.ok) {
+        if (result.error === 'EMAIL_ALREADY_REGISTERED') {
+          form.setError('email', { message: UiText.register.error.emailRegistered })
+          return
+        }
+
+        if (result.error === 'SERVER_ERROR') {
+          form.setError('email', { message: UiText.register.error.serverUnavailable })
+          return
+        }
+
+        return
+      }
+
+      // redirect when success
+      window.location.href = '/dashboard'
+    })
+  }
 
   return (
-    <div
-      className="
-      flex flex-col w-full items-center px-0 landscape:w-full p-8
-      md:px-4 portrait:px-20
-      lg:landscape:px-30 portrait:px-20
-      "
-    >
-      <Card className="shadow-lg w-full max-w-lg min-w-85 p-10">
-        <div className="mb-4 text-5xl font-bold break-words">Register</div>
-        <div className="mb-10 text-sm font-italic break-words">
-          Description/Instructions for registration
-        </div>
-        <div className="flex items-baseline gap-4">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <AvatarSelection chr={username?.charAt(0).toUpperCase()} />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm">
-                The default avatar is '?' and the first character of your username will be your
-                avatar
-              </p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Input
-                type="text"
-                placeholder="Username"
-                className="block mb-4"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm">Choose a unique username</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Input type="email" placeholder="Email" className="block mb-4" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Please enter a valid email address</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Input type="date" className="block mb-4" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Data of birth</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Input type="password" placeholder="Password" className="block mb-4" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Your password must be at least 8 characters long</p>
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Input type="password" placeholder="Confirm Password" className="block mb-4" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-sm">Please confirm your password</p>
-          </TooltipContent>
-        </Tooltip>
-        <div className="flex items-center mb-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Checkbox id="terms" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-sm">You must agree to the terms to continue</p>
-            </TooltipContent>
-          </Tooltip>
-          <Label htmlFor="terms" className="ml-2">
-            I agree to the terms and conditions
-          </Label>
-        </div>
-        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-          Register
-        </button>
+    <div className="flex justify-center p-8">
+      <Card className="w-full max-w-lg p-10 shadow-lg">
+        <div className="text-4xl font-bold mb-4">{UiText.register.title}</div>
+
+        <Form {...form}>
+          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{UiText.register.username.label}</FormLabel>
+                  <div className="flex items-center gap-4">
+                    <AvatarSelection chr={field.value?.charAt(0).toUpperCase()} />
+                    <FormControl>
+                      <Input placeholder={UiText.register.username.placeholder} {...field} />
+                    </FormControl>
+                  </div>
+                  <FormDescription>{UiText.register.username.description}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{UiText.register.email.label}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder={UiText.register.email.placeholder}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>{UiText.register.email.description}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="dob"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{UiText.register.dob.label}</FormLabel>
+                  <FormControl>
+                    <Input type="date" {...field} />
+                  </FormControl>
+                  <FormDescription>{UiText.register.dob.description}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{UiText.register.password.label}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder={UiText.register.password.placeholder}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>{UiText.register.password.description}</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{UiText.register.confirmPassword.label}</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder={UiText.register.confirmPassword.placeholder}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="agree"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-2">
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <FormLabel>{UiText.register.agree.label}</FormLabel>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" disabled={isPending} className="w-full">
+              {isPending ? UiText.register.submit.pending : UiText.register.submit.normal}
+            </Button>
+          </form>
+        </Form>
       </Card>
     </div>
   )
