@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 
 import { updateImageMetaAction } from './actions'
-import { UploadImage } from './apis'
+import { uploadImage } from './apis'
 import { ImageMetaDto } from './dto'
 
 export function useImageUpload() {
@@ -20,7 +20,7 @@ export function useImageUpload() {
 
     startTransition(async () => {
       try {
-        const uploadImageResponse = await UploadImage.api.methods.upload({
+        const uploadImageResponse = await uploadImage({
           file: file,
           domain: options.domain,
           name: options.name ?? file.name,
