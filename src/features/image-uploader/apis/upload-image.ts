@@ -6,7 +6,7 @@ import { ImageFileDto, ImageMetaDto } from '../dto'
 
 const path = '/api/upload/image'
 
-async function upload(
+export async function uploadImage(
   data: ImageFileDto.SaveImageFileRequest
 ): SafePromiseResult<ImageMetaDto.UpdateImageMetaRequest, string> {
   const fromData = new FormData()
@@ -31,8 +31,4 @@ async function upload(
   } catch (error) {
     return Err((error as Error).message)
   }
-}
-
-export const methods = {
-  upload,
 }

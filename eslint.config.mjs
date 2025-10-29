@@ -87,7 +87,10 @@ export default [
       ],
 
       // --- Import alias check ---
-      'import/no-unresolved': ['error', { commonjs: true, caseSensitive: true }],
+      'import/no-unresolved': [
+        'error',
+        { commonjs: true, caseSensitive: true, ignore: ['server-only'] },
+      ],
     },
   },
   {

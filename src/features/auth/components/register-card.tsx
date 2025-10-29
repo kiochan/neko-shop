@@ -1,14 +1,15 @@
+'use client'
+
 import { useState } from 'react'
 
+import { AvatarSelection } from '@/components/ui/avatar-selection'
+import { Card } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-import { AvatarSelection } from '../ui/avatar-selection'
-import { Card } from '../ui/card'
-import { Checkbox } from '../ui/checkbox'
-
-export default function RegisterPageview() {
+export function RegisterCard() {
   const [username, setUsername] = useState('')
 
   return (

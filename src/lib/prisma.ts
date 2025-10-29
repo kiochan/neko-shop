@@ -1,18 +1,17 @@
-// lib/prisma.ts
+import 'server-only'
+
 import { PrismaClient } from '@prisma/client'
 
-declare global {
-  // Let TypeScript know that a prisma instance might be attached to global
-  // Prevent multiple instances being created during hot-reloading in development
-  var prisma: PrismaClient | undefined
+const globalAny = globalThis as unknown as {
+  prisma: PrismaClient | undefined
 }
 
 export const prisma =
-  global.prisma ||
+  globalAny.prisma ??
   new PrismaClient({
     log: ['query'],
   })
 
 if (process.env.NODE_ENV !== 'production') {
-  global.prisma = prisma
+  globalAny.prisma = prisma
 }
