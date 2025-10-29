@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Page } from '@/components/view/page'
+import { PageContainer } from '@/shared/layout/page-container'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
 
 export default function NotFoundPage() {
   return (
-    <Page>
+    <PageContainer>
       <Card>
         <CardHeader>
           <CardTitle>404</CardTitle>
@@ -18,6 +18,6 @@ export default function NotFoundPage() {
           </Link>
         </CardContent>
       </Card>
-    </Page>
+    </PageContainer>
   )
 }

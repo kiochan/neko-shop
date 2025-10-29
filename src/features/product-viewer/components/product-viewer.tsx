@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui/card'
 
 import { loadProducts } from '../actions'
 import { ProductQuery, ViewerMode } from '../definitions'

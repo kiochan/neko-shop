@@ -1,12 +1,12 @@
 'use client'
 
-import { Page } from '@/components/view/page'
 import { RegisterCard } from '@/features/auth'
+import { PageContainer } from '@/shared/layout/page-container'
 
 export default function RegisterPage() {
   return (
-    <Page>
+    <PageContainer>
       <RegisterCard />
-    </Page>
+    </PageContainer>
   )
 }

@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client'
 import { cookies } from 'next/headers'
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Page } from '@/components/view/page'
+import { PageContainer } from '@/shared/layout/page-container'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui/card'
 
 const prisma = new PrismaClient()
 
@@ -16,7 +16,7 @@ export default async function DashboardPage() {
   })
 
   return (
-    <Page>
+    <PageContainer>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Dashboard</CardTitle>
@@ -34,6 +34,6 @@ export default async function DashboardPage() {
           </p>
         </CardFooter>
       </Card>
-    </Page>
+    </PageContainer>
   )
 }

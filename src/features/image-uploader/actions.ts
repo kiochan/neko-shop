@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/shared/lib/prisma'
 import { Err, Ok, SafePromiseResult } from '@/shared/safe-result'
 
 import { ImageMetaDto } from './dto'
