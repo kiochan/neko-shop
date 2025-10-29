@@ -5,18 +5,11 @@ import { CircleAlert } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+import { Alert, AlertTitle, AlertDescription } from '@/shared/ui/alert'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/shared/ui/form'
+import { Input } from '@/shared/ui/input'
 
 import { loginAction } from '../actions'
 import { LoginDto } from '../dto'

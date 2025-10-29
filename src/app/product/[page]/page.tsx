@@ -1,10 +1,10 @@
-import { Page } from '@/components/view/page'
 import { ProductViewer } from '@/features/product-viewer'
+import { PageContainer } from '@/shared/layout/page-container'
 
-export default function ProductPage({ params }: { params: { page: string } }) {
+export default async function ProductPage({ params }: { params: { page: string } }) {
   return (
-    <Page>
+    <PageContainer>
       <ProductViewer page={Number(params.page)} path="/product" />
-    </Page>
+    </PageContainer>
   )
 }

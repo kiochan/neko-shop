@@ -1,10 +1,10 @@
-import { Page } from '@/components/view/page'
 import { LoginCard } from '@/features/auth'
+import { PageContainer } from '@/shared/layout/page-container'
 
 export default function LoginPage() {
   return (
-    <Page>
+    <PageContainer>
       <LoginCard />
-    </Page>
+    </PageContainer>
   )
 }

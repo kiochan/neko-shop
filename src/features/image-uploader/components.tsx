@@ -4,9 +4,9 @@ import { Upload, ImagePlus, RefreshCcw } from 'lucide-react'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
+import { Button } from '@/shared/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
+import { Progress } from '@/shared/ui/progress'
 
 import { UiText } from './constants'
 import { ImageMetaDto } from './dto'

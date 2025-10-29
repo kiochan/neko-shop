@@ -1,9 +1,9 @@
-import { Page } from '@/components/view/page'
+import { PageContainer } from '@/shared/layout/page-container'
 
 export default function HomePage() {
   return (
-    <Page>
+    <PageContainer>
       <h1>TODO: Home Page</h1>
-    </Page>
+    </PageContainer>
   )
 }

@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 
-import { AvatarSelection } from '@/components/ui/avatar-selection'
-import { Card } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { AvatarSelection } from '@/shared/ui/avatar-selection'
+import { Card } from '@/shared/ui/card'
+import { Checkbox } from '@/shared/ui/checkbox'
+import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip'
 
 export function RegisterCard() {
   const [username, setUsername] = useState('')
