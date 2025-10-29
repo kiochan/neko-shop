@@ -1,9 +1,15 @@
+'use client'
+
 import Link from 'next/link'
+
+import { useCurrentUser } from '@/features/auth'
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from '../ui/menubar'
 
 export function HeaderActionUser() {
+  const user = useCurrentUser()
+
   return (
     <Menubar className="border-0 shadow-none bg-transparent">
       <MenubarMenu>
@@ -16,13 +22,26 @@ export function HeaderActionUser() {
           </Avatar>
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem asChild>
-            <Link href="/dashboard">Dashboard</Link>
-          </MenubarItem>
-          <MenubarItem asChild>
-            <Link href="/login">Login</Link>
-          </MenubarItem>
-          <MenubarItem asChild>Logout</MenubarItem>
+          {!user ? null : (
+            <MenubarItem asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </MenubarItem>
+          )}
+          {user ? null : (
+            <MenubarItem asChild>
+              <Link href="/login">Login</Link>
+            </MenubarItem>
+          )}
+          {user ? null : (
+            <MenubarItem asChild>
+              <Link href="/registerpage">Register</Link>
+            </MenubarItem>
+          )}
+          {!user ? null : (
+            <MenubarItem asChild>
+              <Link href="/logout">Logout</Link>
+            </MenubarItem>
+          )}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
