@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { PrismaClient } from '@prisma/client'
 
 const globalAny = globalThis as unknown as {
