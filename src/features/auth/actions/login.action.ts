@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { prisma } from '@/shared/lib/prisma'
+import { prisma } from '@/shared/prisma'
 import { Err, SafePromiseResult } from '@/shared/safe-result'
 
 import { SESSION_COOKIE_NAME, SESSION_DURATION_DAYS } from '../const'

@@ -1,5 +1,5 @@
 import { logoutAction } from '@/features/auth/actions/logout.action'
-import { PageContainer } from '@/shared'
+import { PageContainer } from '@/shared/layout'
 import { Button } from '@/shared/ui/button'
 
 export default function LogoutPage() {

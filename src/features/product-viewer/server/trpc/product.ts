@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { ProductDto } from '@/features/product-viewer/dto'
-import { prisma } from '@/shared/lib/prisma'
+import { prisma } from '@/shared/prisma'
 import { router, publicProcedure } from '@/shared/trpc/server/trpc'
 
 export const productRouter = router({
