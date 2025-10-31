@@ -3,8 +3,6 @@
 This project welcomes contributions.
 Please follow this guide to maintain consistency and readability across the codebase.
 
----
-
 ## 1. Git and GitHub Workflow
 
 ### Branching
