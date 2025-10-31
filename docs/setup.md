@@ -1,48 +1,92 @@
-# Project Setup
+# Setup
 
-Follow these steps to set up the project locally.
+This document explains how to set up and run the project locally.
 
----
+## Requirements
 
-## 1. Install Dependencies
+- Node.js >= 20
+- pnpm >= 10
 
-Make sure you have **Node.js (>=18)** installed.  
-Then install dependencies:
+The project currently uses **SQLite** by default, so no external database setup is required.
+A switch to PostgreSQL may happen later.
 
-```bash
-npm ci
-```
-
-`ci` is for `clean install`
-
----
-
-## 2. Run post-install script.
-
-This script will ini prisma and copy dotenv file.
+## Clone the project
 
 ```bash
-npm run post-install
+git clone https://github.com/kiochan/neko-shop.git
+cd neko-shop
 ```
 
----
-
-## 3. Database reset (optional)
-
-If it's your first time. You should reset your database.
+## Install dependencies
 
 ```bash
-npm run db:reset
+pnpm install
 ```
 
----
-
-## 4. Run the Project Locally
-
-Start the development server:
+If you really need to bypass the pnpm restriction:
 
 ```bash
-npm run dev
+ALLOW_OTHER_PM=true npm install
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+## Environment variables
+
+The default SQLite configuration should work out of the box.
+If needed, ensure `.env` contains:
+
+```
+DATABASE_URL="file:./dev.db"
+```
+
+## Database setup
+
+Generate the Prisma client and apply migrations:
+
+```bash
+pnpm db:generate
+pnpm db:migrate
+```
+
+Reset the database (this deletes all data):
+
+```bash
+pnpm db:reset
+```
+
+Open Prisma Studio:
+
+```bash
+pnpm db:studio
+```
+
+## Start the development server
+
+```bash
+pnpm dev
+```
+
+Visit:
+
+```
+http://localhost:3000
+```
+
+## Production build (optional)
+
+```bash
+pnpm build:prod
+pnpm start
+```
+
+## Switching to PostgreSQL (future)
+
+When switching to PostgreSQL:
+
+1. Update `DATABASE_URL` in `.env`
+2. Run:
+
+   ```bash
+   pnpm db:migrate:prod
+   ```
+
+No further steps are required at this stage.
