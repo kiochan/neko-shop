@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { NavbarSettings } from '@/shared/settings/routes.const'
+import { NavbarSettings } from '@/settings/routes.const'
 
 import {
   NavigationMenu,

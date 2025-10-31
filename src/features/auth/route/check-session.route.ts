@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/const'
-import { prisma } from '@/shared/lib/prisma'
+import { prisma } from '@/shared/prisma'
 
 import { CheckSessionResponse } from '../dto/session.dto'
 

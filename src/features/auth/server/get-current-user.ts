@@ -3,7 +3,7 @@ import 'server-only'
 import { cookies } from 'next/headers'
 
 import { SESSION_COOKIE_NAME } from '@/features/auth/const'
-import { prisma } from '@/shared'
+import { prisma } from '@/shared/prisma'
 
 export async function getCurrentUser() {
   const cookieStore = await cookies()

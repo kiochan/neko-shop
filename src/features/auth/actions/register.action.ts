@@ -3,8 +3,8 @@
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
 
-import { Err, Ok, SafePromiseResult } from '@/shared'
-import { prisma } from '@/shared/lib/prisma'
+import { prisma } from '@/shared/prisma'
+import { Err, Ok, SafePromiseResult } from '@/shared/safe-result'
 
 import { SESSION_COOKIE_NAME, SESSION_DURATION_DAYS } from '../const'
 import { RegisterDto } from '../dto'

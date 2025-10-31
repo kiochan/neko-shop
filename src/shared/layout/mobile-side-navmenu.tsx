@@ -1,7 +1,7 @@
 import { ScrollArea } from '@radix-ui/react-scroll-area'
 import Link from 'next/link'
 
-import { NavbarSettings } from '@/shared/settings/routes.const'
+import { NavbarSettings } from '@/settings/routes.const'
 
 import { Button } from '../ui/button'
 
