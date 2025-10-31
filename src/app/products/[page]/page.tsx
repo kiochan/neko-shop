@@ -6,7 +6,7 @@ export default async function ProductPage({ params }: { params: Promise<{ page: 
 
   return (
     <PageContainer>
-      <ProductViewer page={Number(page)} path="/product" />
+      <ProductViewer page={Number(page)} path="/products" />
     </PageContainer>
   )
 }
