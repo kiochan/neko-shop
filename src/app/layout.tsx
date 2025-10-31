@@ -4,7 +4,6 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { UserProvider } from '@/features/auth'
 import { getCurrentUser } from '@/features/auth/server'
 import { SiteSettings } from '@/shared/settings/site.const'
-
 import { TrpcClientProviders } from '@/shared/trpc'
 
 import './globals.css'
