@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { SiteSettings } from '@/shared/settings/site.const'
+import { SiteSettings } from '@/settings/site.const'
 
 type LogoProps = {
   onClick?: () => void

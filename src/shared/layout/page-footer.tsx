@@ -1,4 +1,4 @@
-import { SiteSettings } from '@/shared/settings/site.const'
+import { SiteSettings } from '@/settings/site.const'
 
 export function PageFooter() {
   return (

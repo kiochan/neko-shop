@@ -1,4 +1,4 @@
-import { NavbarItemSettings } from '@/shared/settings/navbar-item.model'
+import { NavbarItemSettings } from '@/settings/navbar-item.model'
 
 export const NavbarSettings = [
   { id: 'home', label: 'Home', href: '/' },
