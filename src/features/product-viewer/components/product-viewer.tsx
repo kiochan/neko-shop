@@ -1,44 +1,41 @@
+import { api } from '@/shared/trpc/server'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui/card'
 
-import { loadProducts } from '../actions'
-import { ProductQuery, ViewerMode } from '../definitions'
+import { GetProductListRquest } from '../dto/product.dto'
 
 import { ProductGridViewer } from './product-grid-viewer'
 import { ProductListViewer } from './product-list-viewer'
 import { ProductViewerPaginator } from './product-viewer-paginator'
 
 type ProductViewerPropsPrameters = {
-  query?: Omit<ProductQuery, 'offset' | 'size'>
-  viewerMode?: ViewerMode
+  viewerMode?: 'grid' | 'list'
   page?: number
   itemPerPage?: number
   path: string
 }
 
 const defaultPageSize = 8
-const defaultViewerModeMode = ViewerMode.Grid
+const defaultViewerModeMode = 'grid'
 
 export type ProductViewerProps = ProductViewerPropsPrameters
 
 export async function ProductViewer(props: ProductViewerProps) {
   const mode = props.viewerMode ?? defaultViewerModeMode
   const page = props.page ?? 1
-
   const size = props.itemPerPage ?? defaultPageSize
 
   const pageOffset = page - 1
   const itemOffset = pageOffset * size
 
-  const query: ProductQuery = {
-    ...props.query,
+  const query: GetProductListRquest = {
     offset: itemOffset,
     size,
   }
 
-  const { total, queriedProducts } = await loadProducts(query)
+  const { total, queriedProducts } = await api.product.list(query)
 
   const viewer =
-    mode === ViewerMode.Grid ? (
+    mode === 'grid' ? (
       <ProductGridViewer products={queriedProducts} />
     ) : (
       <ProductListViewer products={queriedProducts} />
