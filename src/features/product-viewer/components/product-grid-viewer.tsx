@@ -1,4 +1,4 @@
-import { Product } from '../definitions'
+import { Product } from '../dto/product.dto'
 
 export type ProductGridViewerProps = {
   products: Product[]

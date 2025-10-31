@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { UserProvider } from '@/features/auth'
 import { getCurrentUser } from '@/features/auth/server'
 import { SiteSettings } from '@/shared/settings/site.const'
+import { TrpcClientProviders } from '@/shared/trpc'
 
 import './globals.css'
 
@@ -21,20 +22,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = { title, description }
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await getCurrentUser()
 
   return (
     <html lang="en">
-      <UserProvider user={user}>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          {children}
-        </body>
-      </UserProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <TrpcClientProviders>
+          <UserProvider user={user}>{children}</UserProvider>
+        </TrpcClientProviders>
+      </body>
     </html>
   )
 }
