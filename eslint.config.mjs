@@ -11,18 +11,30 @@ import nextPlugin from '@next/eslint-plugin-next'
 import { fixupPluginRules } from '@eslint/compat'
 
 export default [
-  // Automatically reuse patterns from .gitignore
+  // Apply ignore patterns from .gitignore
   gitignore(),
 
-  // Recommended rules
+  // Treat .js and .mjs files as plain JavaScript
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    rules: {
+      'no-undef': 'off',
+    },
+  },
+
   js.configs.recommended,
   ...tseslint.configs.recommended,
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   prettierConfig,
 
+  // TypeScript source files
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -56,12 +68,10 @@ export default [
       'unused-imports': unusedImports,
     },
     rules: {
-      // React specific rules
       'react/react-in-jsx-scope': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
-      // Import sorting
       'import/order': [
         'error',
         {
@@ -73,9 +83,8 @@ export default [
         },
       ],
 
-      // Remove unused imports/variables
       'unused-imports/no-unused-imports': 'error',
-      '@typescript-eslint/no-unused-vars': 'off', // disable duplicate check
+      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-vars': [
         'warn',
         {
@@ -86,13 +95,14 @@ export default [
         },
       ],
 
-      // --- Import alias check ---
       'import/no-unresolved': [
         'error',
         { commonjs: true, caseSensitive: true, ignore: ['server-only'] },
       ],
     },
   },
+
+  // Disable resolution checks for config files
   {
     files: ['eslint.config.*'],
     rules: {
