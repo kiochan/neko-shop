@@ -19,7 +19,7 @@ const config = {
 
     // Subject rules
     'subject-empty': [2, 'never'],
-    'subject-case': [2, 'always', 'lower-case'],
+    'subject-case': [2, 'always', ['sentence-case', 'lower-case', 'start-case', 'pascal-case']],
     'subject-full-stop': [2, 'never', '.'],
 
     // Type must be lowercase
