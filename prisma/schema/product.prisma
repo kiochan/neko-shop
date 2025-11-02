@@ -3,7 +3,7 @@ model Product {
   name        String
   slug        String   @unique
   description String
-  price       Decimal
+  price       BigInt
   imageUrl    String?
   createdAt   DateTime @default(now())
 
