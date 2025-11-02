@@ -8,6 +8,10 @@ on:
 jobs:
   build-and-check:
     runs-on: ubuntu-latest
+    environment: dev
+    env:
+      NODE_ENV: ${{ vars.NODE_ENV }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
     steps:
       - name: Checkout repository
