@@ -39,7 +39,7 @@ export function ProductListViewer({ products }: ProductListViewerProps) {
             </TableCell>
 
             <TableCell className="text-right text-lg font-bold text-blue-600">
-              ${(product.price / 100).toFixed(2)}
+              ${(Number(product.price) / 100).toFixed(2)}
             </TableCell>
           </TableRow>
         ))}

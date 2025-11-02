@@ -17,7 +17,7 @@ export function ProductGridViewer({ products }: ProductGridViewerProps) {
           <h3 className="text-md font-semibold text-center">{product.name}</h3>
           <p className="text-sm text-gray-600 text-center">{product.description}</p>
           <p className="text-lg font-bold text-blue-600 mt-2">
-            ${(product.price / 100).toFixed(2)}
+            {(Number(product.price) / 100).toFixed(2)}
           </p>
         </div>
       ))}
