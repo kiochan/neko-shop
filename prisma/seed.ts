@@ -84,7 +84,7 @@ async function main() {
         name: p.name,
         slug: await uniqueSlug(p.name.toLowerCase().replace(/\s+/g, '-').slice(0, 20)),
         description: p.description,
-        price: p.price * 100, // store as cents
+        price: BigInt(p.price * 100), // store as cents
         imageUrl: p.imageUrl,
       },
     })
