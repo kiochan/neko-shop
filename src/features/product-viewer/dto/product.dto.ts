@@ -11,7 +11,7 @@ export const ProductZod = z.object({
   description: z.string(),
   id: z.number(),
   createdAt: z.date(),
-  price: z.number(),
+  price: z.bigint(),
   slug: z.string(),
   imageUrl: z.string().optional(),
 })

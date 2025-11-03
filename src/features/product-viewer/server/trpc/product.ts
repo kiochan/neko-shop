@@ -29,7 +29,7 @@ export const productRouter = router({
           name: p.name,
           slug: p.slug,
           description: p.description,
-          price: p.price.toNumber(), // Decimal -> number
+          price: p.price,
           imageUrl: p.imageUrl ?? undefined, // nullable -> undefined
           createdAt: p.createdAt,
         })),
@@ -54,7 +54,7 @@ export const productRouter = router({
         name: p.name,
         slug: p.slug,
         description: p.description,
-        price: p.price.toNumber(),
+        price: p.price,
         imageUrl: p.imageUrl ?? '',
         createdAt: p.createdAt,
       }
