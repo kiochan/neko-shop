@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
 import { ProductZod } from '@/features/product-viewer/dto/product.dto'
-import { PageContainer } from '@/shared/layout/page-container'
 import { api } from '@/shared/trpc/server'
 import { Card } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
@@ -16,11 +15,7 @@ export async function ProductDetailPage({ id }: ProductId) {
   const ProductsArrayZod = z.array(ProductZod)
   const parsed = ProductsArrayZod.safeParse([product])
   if (!parsed.success) {
-    return (
-      <PageContainer>
-        <div className="p-6">Error</div>
-      </PageContainer>
-    )
+    return <div className="p-6">Error</div>
   }
 
   return (
