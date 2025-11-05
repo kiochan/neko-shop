@@ -1,0 +1,17 @@
+model Cart {
+  id          Int      @id @default(autoincrement())
+  customerId  Int      @unique
+  customer    Customer @relation("CustomerCart", fields: [customerId], references: [id])
+  lastUpdated DateTime @updatedAt
+
+  items CartItem[]
+}
+
+model CartItem {
+  id         Int     @id @default(autoincrement())
+  cartId Int
+  cart       Cart    @relation(fields: [cartId], references: [id])
+  productId  Int
+  product    Product @relation(fields: [productId], references: [id])
+  quantity   Int
+}
