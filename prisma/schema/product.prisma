@@ -9,6 +9,7 @@ model Product {
 
   tags       Tag[]       @relation("ProductTags")
   orderItems OrderItem[]
+  cartItems  CartItem[]
 }
 
 model Tag {

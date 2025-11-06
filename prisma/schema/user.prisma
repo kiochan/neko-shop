@@ -44,6 +44,7 @@ model Customer {
   id   Int  @id
   user User @relation("CustomerUser", fields: [id], references: [id])
 
+  cart      Cart?     @relation("CustomerCart")
   orders    Order[]   @relation("CustomerOrders")
   addresses Address[] @relation("CustomerAddress")
 }
