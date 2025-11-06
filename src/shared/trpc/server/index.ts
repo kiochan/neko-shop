@@ -1,5 +1,7 @@
 import 'server-only'
-
+import { createContext } from './context'
 import { appRouter } from './router'
 
-export const api = appRouter.createCaller({})
+export async function getTrpcServerApi() {
+  return appRouter.createCaller(await createContext())
+}

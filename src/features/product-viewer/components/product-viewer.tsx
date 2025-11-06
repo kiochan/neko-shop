@@ -1,4 +1,4 @@
-import { api } from '@/shared/trpc/server'
+import { getTrpcServerApi } from '@/shared/trpc/server'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/ui/card'
 
 import { GetProductListRquest } from '../dto/product.dto'
@@ -20,6 +20,7 @@ const defaultViewerModeMode = 'grid'
 export type ProductViewerProps = ProductViewerPropsPrameters
 
 export async function ProductViewer(props: ProductViewerProps) {
+  const api = await getTrpcServerApi()
   const mode = props.viewerMode ?? defaultViewerModeMode
   const page = props.page ?? 1
   const size = props.itemPerPage ?? defaultPageSize
