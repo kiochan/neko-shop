@@ -16,7 +16,7 @@ if pm2 list --silent | grep -q "neko-shop"; then
   pm2 reload neko-shop --update-env
 else
   echo "[deploy-dev] starting pm2 process..."
-  pm2 start ecosystem.config.mjs
+  pm2 start ecosystem.config.js
 fi
 
 pm2 save
