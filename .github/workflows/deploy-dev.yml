@@ -43,7 +43,7 @@ jobs:
             cd ${{ secrets.SSH_PATH }}
             git fetch --all
             git reset --hard origin/dev
-            pnpm install --prod --frozen-lockfile
+            pnpm install --frozen-lockfile
             pnpm build
             if pm2 describe neko-shop > /dev/null; then
               pm2 reload neko-shop --update-env
