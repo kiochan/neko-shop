@@ -28,6 +28,7 @@ jobs:
             export PATH="$PNPM_HOME:$PATH"
             export PATH="$HOME/.local/bin:$PATH"
             export PATH="$HOME/.npm-global/bin:$PATH"
+            export PORT=${{ vars.PORT }}
 
             cd ${{ secrets.SSH_PATH }}
             git fetch --all
