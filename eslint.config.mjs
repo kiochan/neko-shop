@@ -109,4 +109,13 @@ export default [
       'import/no-unresolved': 'off',
     },
   },
+  {
+    files: ['ecosystem.config.mjs'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        process: 'readonly',
+      },
+    },
+  },
 ]

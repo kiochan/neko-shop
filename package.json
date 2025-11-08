@@ -23,8 +23,9 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "postbuild": "bash -c \"mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static && ln -s ../../static .next/standalone/.next/static\"",
     "postinstall": "pnpm db:generate",
-    "start": "next start",
+    "start": "bash -c \"HOSTNAME=0.0.0.0 node .next/standalone/server.js\"",
     "prepare": "husky"
   },
   "dependencies": {

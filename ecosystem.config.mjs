@@ -2,16 +2,13 @@ export default {
   apps: [
     {
       name: 'neko-shop',
-      script: 'pnpm',
-      args: 'start',
+      script: 'node',
+      args: '.next/standalone/server.js',
       cwd: './',
       env: {
         NODE_ENV: 'production',
+        PORT: process.env.PORT || 3000,
       },
-      instances: 1,
-      autorestart: true,
-      watch: false,
-      max_memory_restart: '512M',
     },
   ],
 }
