@@ -1,0 +1,53 @@
+name: Deploy to dev
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [closed]
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build Project
+        run: pnpm build
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.SSH_PATH }}
+            git fetch --all
+            git reset --hard origin/dev
+            pnpm install --frozen-lockfile
+            echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+            pnpm build
+            if pm2 describe neko-shop > /dev/null; then
+              pm2 reload neko-shop --update-env
+            else
+              pm2 start ecosystem.config.mjs
+            fi
