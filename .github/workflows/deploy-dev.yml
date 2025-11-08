@@ -32,7 +32,7 @@ jobs:
             cd ${{ secrets.SSH_PATH }}
             git fetch --all
             git reset --hard origin/dev
-            pnpm install --prod --frozen-lockfile
+            pnpm install --frozen-lockfile
             echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
             pnpm build
             if pm2 describe neko-shop > /dev/null; then
