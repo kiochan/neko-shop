@@ -110,10 +110,13 @@ export default [
     },
   },
   {
-    files: ['ecosystem.config.mjs'],
+    files: ['ecosystem.config.js'],
     languageOptions: {
-      sourceType: 'module',
+      sourceType: 'script', // CommonJS
       globals: {
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
         process: 'readonly',
       },
     },
