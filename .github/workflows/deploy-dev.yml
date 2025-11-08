@@ -27,7 +27,7 @@ jobs:
             export PNPM_HOME="$HOME/.local/share/pnpm"
             export PATH="$PNPM_HOME:$PATH"
             export PATH="$HOME/.local/bin:$PATH"
-            export PATH="$HOME/.n/bin:$PATH"
+            export PATH="$HOME/.npm-global/bin:$PATH"
 
             cd ${{ secrets.SSH_PATH }}
             git fetch --all
@@ -36,7 +36,7 @@ jobs:
             echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
             pnpm build
             if pm2 describe neko-shop > /dev/null; then
-              pm2 reload neko-shop --update-env
+                pm2 reload neko-shop --update-env
             else
-              pm2 start ecosystem.config.mjs
+                pm2 start ecosystem.config.mjs
             fi
