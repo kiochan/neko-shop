@@ -1,123 +1,104 @@
-import path from 'node:path'
-import gitignore from 'eslint-config-flat-gitignore'
-import js from '@eslint/js'
-import tseslint from 'typescript-eslint'
+// eslint.config.mjs
+import nextPlugin from '@next/eslint-plugin-next'
+import prettier from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
 import reactPlugin from 'eslint-plugin-react'
-import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import hooksPlugin from 'eslint-plugin-react-hooks'
 import unusedImports from 'eslint-plugin-unused-imports'
-import prettierConfig from 'eslint-config-prettier'
-import nextPlugin from '@next/eslint-plugin-next'
-import { fixupPluginRules } from '@eslint/compat'
+import tseslint from 'typescript-eslint'
 
 export default [
-  // Apply ignore patterns from .gitignore
-  gitignore(),
+  // TypeScript Recommended (Flat)
+  ...tseslint.configs.recommended,
 
-  // Treat .js and .mjs files as plain JavaScript
+  // Prettier (disables formatting rules)
+  prettier,
+
+  // React JSX Runtime Rules
   {
-    files: ['**/*.js', '**/*.mjs'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+    plugins: {
+      react: reactPlugin,
     },
     rules: {
-      'no-undef': 'off',
+      ...reactPlugin.configs['jsx-runtime'].rules,
+    },
+    settings: {
+      react: { version: 'detect' },
     },
   },
 
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
-  prettierConfig,
-
-  // TypeScript source files
+  // React Hooks Rules
   {
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      parser: tseslint.parser,
-      parserOptions: {
-        project: path.resolve('./tsconfig.json'),
-        tsconfigRootDir: path.resolve('.'),
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
-    settings: {
-      'import/resolver': {
-        'eslint-import-resolver-typescript': {
-          alwaysTryTypes: true,
-          project: [path.resolve('./tsconfig.json')],
-        },
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-          paths: [path.resolve('./src')],
-        },
-        alias: {
-          map: [['@', path.resolve('./src')]],
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        },
-      },
-      react: { version: 'detect' },
-    },
     plugins: {
-      '@next/next': fixupPluginRules(nextPlugin),
-      react: reactPlugin,
-      'react-hooks': reactHooksPlugin,
-      'unused-imports': unusedImports,
+      'react-hooks': hooksPlugin,
     },
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
+      ...hooksPlugin.configs.recommended.rules,
+    },
+  },
 
+  // Next.js App Router + Core Web Vitals
+  {
+    plugins: {
+      '@next/next': nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+    },
+  },
+
+  // Import / Resolve / Sorting
+  {
+    plugins: {
+      import: importPlugin,
+    },
+    rules: {
       'import/order': [
         'error',
         {
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           pathGroups: [{ pattern: '@/**', group: 'internal', position: 'after' }],
-          pathGroupsExcludedImportTypes: ['builtin'],
           alphabetize: { order: 'asc', caseInsensitive: true },
           'newlines-between': 'always',
         },
       ],
+      'import/no-unresolved': ['error', { ignore: ['server-only'] }],
+    },
+  },
 
+  // Unused imports / dead code cleanup
+  {
+    plugins: {
+      'unused-imports': unusedImports,
+    },
+    rules: {
       'unused-imports/no-unused-imports': 'error',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-vars': [
         'warn',
-        {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
+        { varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+
+  // Ignore build artifacts
+  {
+    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+  },
+  {
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
         },
-      ],
-
-      'import/no-unresolved': [
-        'error',
-        { commonjs: true, caseSensitive: true, ignore: ['server-only'] },
-      ],
-    },
-  },
-
-  // Disable resolution checks for config files
-  {
-    files: ['eslint.config.*'],
-    rules: {
-      'import/no-unresolved': 'off',
-    },
-  },
-  {
-    files: ['ecosystem.config.js'],
-    languageOptions: {
-      sourceType: 'script', // CommonJS
-      globals: {
-        require: 'readonly',
-        module: 'readonly',
-        __dirname: 'readonly',
-        process: 'readonly',
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+        alias: {
+          map: [['@', './src']],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
       },
     },
   },
