@@ -6,7 +6,6 @@
     "prisma.prisma", // Prisma schema support
     "bradlc.vscode-tailwindcss", // Tailwind CSS IntelliSense
     "github.vscode-pull-request-github", // GitHub PRs & Issues
-    "github.vscode-github-actions", // GitHub Actions workflow support
-    "eamodio.gitlens" // GitLens - Git history & insights
+    "github.vscode-github-actions" // GitHub Actions workflow support
   ]
 }
