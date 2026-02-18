@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { ProductZod } from '@/features/product-viewer/dto/product.dto'
-import { api } from '@/shared/trpc/server'
+import { getTrpcServerApi } from '@/shared/trpc/server'
 import { Card } from '@/shared/ui'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
@@ -11,6 +11,7 @@ export type ProductId = {
 }
 
 export async function ProductDetailPage({ id }: ProductId) {
+  const api = await getTrpcServerApi()
   const product = await api.product.get({ id })
   const ProductsArrayZod = z.array(ProductZod)
   const parsed = ProductsArrayZod.safeParse([product])
